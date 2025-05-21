@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feynman Technique</title>
+  <link rel="stylesheet" href="Styles/techniques.css" />
+  <link rel="stylesheet" href="Styles/Header.css">
+  <script type="module" src="Scripts/nav.js" defer></script>
+</head>
+<body>
+  <div class="wrapper">
+
+<div class="header">
+  <div class="nav-links">
+    <button class="nav-button" id="logo" onclick="navigateTo('homepage.html')">STUDio</button>
+    <button class="nav-button" onclick="navigateTo('homepage.html')">Home</button>
+    <button class="nav-button" onclick="navigateTo('techniques.html')">Techniques</button>
+    <button class="nav-button" onclick="navigateTo('progress.html')">Progress</button>
+    <button class="nav-button" onclick="navigateTo('AboutUS/abts.html')">About</button>
+  </div>
+  <div class="profile-menu-container">
+    <img src="Images/user.png" alt="Profile" class="profile-icon-img" />
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="cards">
+
+    <div id="card1" class="flashcard">
+      <div class="card-center">
+        <p>The <strong>Feynman Technique,</strong> named after physicist Richard Feynman, is a method for mastering complex ideas by explaining them in the simplest way possible. If you can't explain a concept simply, you don't really understand it. This technique pushes you to confront gaps in your knowledge, deepen understanding, and build confidence in what you've learned.</p>
+      </div>
+      <div class="arrows">
+        <button type="button" class="arrow-button" data-target="#card2">➤</button>
+      </div>
+    </div>
+
+    <div id="card2" class="flashcard">
+      <div class="card-center1">
+        <h2 class="flashcard-title">STRUCTURE</h2>
+        <p><strong>Ideal For:</strong> Complex theories, conceptual subjects, formulas, and real-world applications</p>
+        <p><strong>Tools:</strong> Notebook, whiteboard, digital docs</p>
+        <p><strong>Time Required:</strong> 30 minutes to 1 hour per topic</p>
+        <p><strong>Complements:</strong> Active Recall and Interleaved Practice</p>
+      </div>
+      <div class="arrows">
+        <button type="button" class="arrow-button" data-target="#card1">◀</button>
+        <button type="button" class="arrow-button" data-target="#card3">➤</button>
+      </div>
+    </div>
+
+    <div id="card3" class="flashcard">
+      <div class="card-center">
+        <h2 class="flashcard-title">Steps to Master Feynman</h2>
+      </div>
+      <div class="arrows">
+        <button type="button" class="arrow-button" data-target="#card2">◀</button>
+        <button type="button" class="arrow-button" data-target="#card4">➤</button>
+      </div>
+    </div>
+
+    <div id="card4" class="flashcard card-step">
+      <h2 class="card-title">STEP 1</h2>
+      <div class="card-body">
+        <div class="card-text">
+          <h3><strong>Choose a concept you want to learn</strong></h3>
+          <p>Pick a topic you're currently studying—something that feels difficult or unclear. This could be anything from "Ohm's Law" to "Supply and Demand" or "Recursion in Programming."</p>
+        </div>
+        <div class="card-image">
+          <img src="Images/pic2.jpg" alt="Study setup" />
+        </div>
+      </div>
+      <div class="card-arrows">
+        <button type="button" class="arrow-button" data-target="#card3">◀</button>
+        <button type="button" class="arrow-button" data-target="#card5">▶</button>
+      </div>
+    </div>
+
+    <div id="card5" class="flashcard card-step">
+      <h2 class="card-title">STEP 2</h2>
+      <div class="card-body">
+        <div class="card-text">
+          <h3><strong>Explain it as if you're teaching a 12-year-old</strong></h3>
+          <p>Write or speak about the topic in simple terms. Avoid jargon. Pretend you're explaining it to a child or someone completely unfamiliar with it. Use analogies, visuals, and real-life examples if helpful.</p>
+        </div>
+        <div class="card-image">
+          <img src="Images/pic8.jpg" alt="Study setup" />
+        </div>
+      </div>
+      <div class="card-arrows">
+        <button type="button" class="arrow-button" data-target="#card4">◀</button>
+        <button type="button" class="arrow-button" data-target="#card6">▶</button>
+      </div>
+    </div>
+
+    <div id="card6" class="flashcard card-step">
+      <h2 class="card-title">STEP 3</h2>
+      <div class="card-body">
+        <div class="card-text">
+          <h3><strong>Identify the gaps in your explanation</strong></h3>
+          <p>Where did you get stuck? What part did you skip or explain vaguely? These are signs you haven't fully grasped that part. Go back to your textbook or resources and revisit those points.</p>
+        </div>
+        <div class="card-image">
+          <img src="Images/pic5.jpg" alt="Study setup" />
+        </div>
+      </div>
+      <div class="card-arrows">
+        <button type="button" class="arrow-button" data-target="#card5">◀</button>
+        <button type="button" class="arrow-button" data-target="#card7">▶</button>
+      </div>
+    </div>
+
+    <div id="card7" class="flashcard card-step">
+      <h2 class="card-title">STEP 4</h2>
+      <div class="card-body">
+        <div class="card-text">
+          <h3><strong>Simplify and refine</strong></h3>
+          <p>Now that you've filled in the gaps, rewrite or re-explain the concept even more clearly. Your goal is to create a version that's so simple, you could teach it to anyone—without losing the core meaning.</p>
+        </div>
+        <div class="card-image">
+          <img src="Images/pic4.jpg" alt="Study setup" />
+        </div>
+      </div>
+      <div class="card-arrows">
+        <button type="button" class="arrow-button" data-target="#card6">◀</button>
+        <button type="button" class="arrow-button" data-target="#card8">▶</button>
+      </div>
+    </div>
+
+    <div id="card8" class="flashcard card-step">
+      <h2 class="card-title">STEP 5</h2>
+      <div class="card-body">
+        <div class="card-text">
+          <h3><strong>Review and repeat</strong></h3>
+          <p>Practice teaching it out loud. If possible, explain it to a friend or classmate and invite questions. If they understand and can repeat it back, you've nailed it. If not, revise and repeat the process.</p>
+        </div>
+        <div class="card-image">
+          <img src="Images/pic6.jpg" alt="Study setup" />
+        </div>
+      </div>
+      <div class="card-arrows">
+        <button type="button" class="arrow-button" data-target="#card7">◀</button>
+        <button type="button" class="arrow-button" data-target="#card9">▶</button>
+      </div>
+    </div>
+
+    <div id="card9" class="flashcard">
+      <div class="card-center">
+        <p>Congratulations, you have mastered <strong>Feynman!</strong></p>
+        <p>(Click other study techniques below or click home to return home)</p>
+      </div>
+      <div class="arrows">
+        <button type="button" class="arrow-button" data-target="#card8">◀</button>
+        <button type="button" class="arrow-button" data-target="#card1">▶</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="tab-buttons">
+  <button type="button" class="tab" onclick="navigateTo('active-recall.html')">ACTIVE RECALL</button>
+  <button type="button" class="tab" onclick="navigateTo('pomodoro.html')">POMODORO</button>
+  <button type="button" class="tab" onclick="navigateTo('spaced-repetition.html')">SPACED REPETITION</button>
+  <button type="button" class="tab active" onclick="navigateTo('feynman.html')">FEYNMAN</button>
+  <button type="button" class="tab" onclick="navigateTo('interleaved-practice.html')">INTERLEAVED PRACTICE</button>
+</div>
+
+<div class="footer">
+  <div class="footer-links">
+    <button type="button" class="nav-button" onclick="navigateTo('AboutUS/abts.html')">About Us</button>
+  </div>
+</div>
+
+<div class="profile-overlay" id="profileOverlay"></div>
+<div class="profile-slide-menu" id="profileSlideMenu">
+  <button class="close-profile-menu">&times;</button>
+  <div class="profile-menu-content">
+    <button class="nav-button" onclick="navigateTo('account.html')">My Account</button>
+    <button class="nav-button" onclick="logout()">Logout</button>
+  </div>
+</div>
+
+<script src="Scripts/techniques.js"></script>
+<script>
+  function navigateTo(url) {
+    window.location.href = url;
+  }
+  function logout() {
+    window.location.href = 'index.html';
+  }
+</script>
+</body>
+</html>

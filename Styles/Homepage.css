@@ -1,0 +1,114 @@
+body {
+  background: linear-gradient(to right, #000000, #2f2f2f, #000000);
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+}
+
+.main-content {
+  width: 100%;
+  max-width: 1600px;
+  margin: 50px auto 0 auto;
+  padding: 0 40px 100px;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 80px;
+  width: 100%;
+}
+
+.left-column {
+  flex: 3;
+  min-width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.quote {
+  font-size: 3.5rem;
+  font-weight: bold;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.descrp {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  text-align: justify;
+  margin-bottom: 0;
+  overflow-wrap: break-word;
+}
+
+.image-box {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  background: linear-gradient(to right, #000000, #2f2f2f, #000000);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.image-box img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.right-column {
+  flex: 2;
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 80px;
+  border-radius: 10px;
+  border: 2px solid white;
+  background: linear-gradient(to right, #000000, #2f2f2f, #000000);
+}
+
+.right-column p {
+  margin-bottom: 20px;
+}
+
+.right-column button {
+  background: none;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 14px 20px;
+  border: 2px solid white;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.right-column button:hover {
+  background-color: white;
+  color: black;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 1200px) {
+  .container {
+    justify-content: center;
+  }
+  
+  .left-column, .right-column {
+    flex: 1 1 100%;
+    max-width: 800px;
+  }
+  
+  .right-column {
+    margin-top: 40px;
+  }
+}

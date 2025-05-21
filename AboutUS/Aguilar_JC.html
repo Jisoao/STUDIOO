@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Profile</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #000000, #2f2f2f, #000000);
+      color: #ffffff;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .Title{
+      color: rgb(255, 255, 255);
+    }
+
+    .container {
+      width: 85%;
+      max-width: 1000px;
+      background: linear-gradient(to right, #000000, #2f2f2f, #000000);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.859);
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #444;
+    }
+
+    .profile-header img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #060606;
+    }
+
+    .info {
+      flex: 1;
+    }
+
+    .profile-header .info h2 {
+      margin: 0;
+      color: #ffffff;
+    }
+
+    .info p {
+      margin: 5px 0;
+      color: #ffffff;
+    }
+
+    .motto {
+      text-align: center;
+      font-style: italic;
+      color: #ffffff;
+      margin: 20px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: linear-gradient(to right, #000000, #2f2f2f, #000000);
+      border-radius: 8px;
+      overflow: hidden;
+      color: rgb(255, 255, 255);
+    }
+
+    th, td {
+      border: 1px solid #adacac;
+      padding: 14px;
+      text-align: center;
+    }
+
+    th {
+      background: #5a6674;
+      color: rgb(255, 255, 255);
+    }
+
+    .photos {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .photo-box {
+      width: 100%;
+      height: 260px;
+      background: #000000;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #bbb;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .additional-info {
+      margin-top: 20px;
+      background: linear-gradient(to right, #000000, #2f2f2f, #000000);
+      padding: 18px;
+      border-radius: 8px;
+      color: #ffffff;
+      font-size: 16px;
+    }
+
+    .BtHp {
+      margin-top: 50px;
+      text-align: center;
+      font-size: 20px;
+      padding: 10px 15px;
+      background-color: #000000;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 8px;
+    }
+    
+    .BtHp a {
+      color: white;
+      display: block;
+      text-decoration: none;
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="profile-header">
+      <img src="Images/Yoh/yoh.jpg" alt="Profile Picture">
+      <div class="info">
+        <h2>Johann Carl Macaspac Aguilar</h2>
+        <p><strong>Age:</strong> 19</p>
+        <p><strong>Birthday:</strong> July 11, 2005</p>
+        <p><strong>Address:</strong> Sta.Cruz Lubao Pampanga, Philippines</p>
+        <p><strong>Contact:</strong> 0976-642-9197</p>
+        <p><strong>Email:</strong> aguilarjohanncarl135@gmail.com</p>
+        <p><strong>Year:</strong> 2nd Year</p>
+        <p><strong>Section:</strong> BSCpE 2B</p>
+      </div>
+    </div>
+
+    <div class="motto">
+      <p>"Therefore do not worry about tomorrow, for tomorrow will worry about itself. Each day has enough trouble of its own."</p>
+      <p>Matthew 6:34</p>
+    </div>
+
+    <h2 class="Title">Subjects Enrolled</h2>
+    <table>
+      <tr>
+        <th>No.</th>
+        <th>Subject Code</th>
+        <th>Subject</th>
+        <th>Credit Unit</th>
+        <th>Teacher</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>CpEM 223</td>
+        <td>Numerical Methods</td>
+        <td>3</td>
+        <td>Engr. John Vincent Mendoza</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>CpE 224</td>
+        <td>Software Design</td>
+        <td>4</td>
+        <td>Engr. Angelica Maniago</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>AEC 224</td>
+        <td>Fundamentals of Electronic Circuits</td>
+        <td>4</td>
+        <td>Engr. Daniel Castro</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>WEB 224</td>
+        <td>Web Programming</td>
+        <td>3</td>
+        <td>Engr. Jamie S. Regala</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>CSS 113</td>
+        <td>Computer System Servicing</td>
+        <td>3</td>
+        <td>Engr. Juvy Grume</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>CpE 223</td>
+        <td>Basic Occupational Health and Safety</td>
+        <td>3</td>
+        <td>Engr. Jamie S. Regala</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>PATHFit 222</td>
+        <td>Menu of Dance, Sports, Outdoor Activities</td>
+        <td>2</td>
+        <td>Mr. Mark Adrian Eduarte</td>
+      </tr>
+    </table>
+
+    <div class="additional-info">
+    <p>
+      Johann Carl Aguilar comes from a family of five and is the middle child. 
+      Raised by devoted Catholic parents, his faith has played a significant role 
+      in shaping his beliefs, making him a firm believer in God. Currently, he is 
+      pursuing a Computer Engineering degree at Don Honorio Ventura State University (DHVSU) 
+      and taking part in various events. As a student, he prioritizes both his mental and 
+      physical well-being by regularly going to the gym and spending quality 
+      time with friends and family.
+    </p>
+    </div>
+
+    <h2 class="Title">Photos</h2>
+    <div class="photos">
+      <img class="photo-box" src="Images/Yoh/yoh1.jpg">
+      <img class="photo-box" src="Images/Yoh/yoh2.jpeg">
+      <img class="photo-box" src="Images/Yoh/yoh3.jpeg">
+      <img class="photo-box" src="Images/Yoh/yoh4.jpg">
+      <img class="photo-box" src="Images/Yoh/yoh5.jpg">
+      <img class="photo-box" src="Images/Yoh/yoh6.jpg">
+    </div>
+
+    <div class="BtHp">
+      <a href="abts.html">Back to Home</a>
+    </div>
+  </div>
+</body>
+</html>

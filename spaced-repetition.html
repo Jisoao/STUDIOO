@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Spaced Repetition</title>
+  <link rel="stylesheet" href="Styles/techniques.css" />
+  <link rel="stylesheet" href="Styles/Header.css">
+  <script type="module" src="Scripts/nav.js" defer></script>
+</head>
+<body>
+  <div class="wrapper">
+
+    <div class="header">
+      <div class="nav-links">
+        <button class="nav-button" id="logo" onclick="navigateTo('homepage.html')">STUDio</button>
+        <button class="nav-button" onclick="navigateTo('homepage.html')">Home</button>
+        <button class="nav-button" onclick="navigateTo('techniques.html')">Techniques</button>
+        <button class="nav-button" onclick="navigateTo('progress.html')">Progress</button>
+        <button class="nav-button" onclick="navigateTo('AboutUS/abts.html')">About</button>
+      </div>
+      <div class="profile-menu-container">
+        <img src="Images/user.png" alt="Profile" class="profile-icon-img" />
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="cards">
+
+        <div id="card1" class="flashcard">
+          <div class="card-center">
+            <p><strong>Spaced Repetition</strong> is a powerful method that optimizes the timing of reviews to boost long-term memory retention. Instead of cramming the same material repeatedly, you space out reviews over increasing intervals—just as you're about to forget. It's scientifically proven to help you remember more with less time and effort.</p>
+          </div>
+          <div class="arrows">
+            <button type="button" class="arrow-button" data-target="#card2">➤</button>
+          </div>
+        </div>
+
+        <div id="card2" class="flashcard">
+          <div class="card-center1">
+            <h2 class="flashcard-title">STRUCTURE</h2>
+            <p><strong>Ideal For:</strong> Vocabulary, definitions, dates, formulas</p>
+            <p><strong>Tools:</strong> Anki, Quizlet, calendar, notebook</p>
+            <p><strong>Time Required:</strong> 5–20 minutes per day</p>
+            <p><strong>Complements:</strong> Active Recall</p>
+          </div>
+          <div class="arrows">
+            <button type="button" class="arrow-button" data-target="#card1">◀</button>
+            <button type="button" class="arrow-button" data-target="#card3">➤</button>
+          </div>
+        </div>
+
+        <div id="card3" class="flashcard">
+          <div class="card-center">
+            <h2 class="flashcard-title">Steps to Master Spaced Repetition</h2>
+          </div>
+          <div class="arrows">
+            <button type="button" class="arrow-button" data-target="#card2">◀</button>
+            <button type="button" class="arrow-button" data-target="#card4">➤</button>
+          </div>
+        </div>
+
+        <div id="card4" class="flashcard card-step">
+          <h2 class="card-title">STEP 1</h2>
+          <div class="card-body">
+            <div class="card-text">
+              <h3><strong>Create review materials</strong></h3>
+              <p>Turn your study material into flashcards or Q&A style notes. Each card should contain only one idea or concept.</p>
+            </div>
+            <div class="card-image">
+              <img src="Images/pic14.jpg" alt="Study setup" />
+            </div>
+          </div>
+          <div class="card-arrows">
+            <button type="button" class="arrow-button" data-target="#card3">◀</button>
+            <button type="button" class="arrow-button" data-target="#card5">▶</button>
+          </div>
+        </div>
+
+        <div id="card5" class="flashcard card-step">
+          <h2 class="card-title">STEP 2</h2>
+          <div class="card-body">
+            <div class="card-text">
+              <h3><strong>Use a spaced repetition schedule</strong></h3>
+              <p>Apps like Anki will automatically handle the timing for you based on how well you remember each card. For manual learners, try this schedule:</p>
+              <ul>
+                <li>1st review: Day 1</li>
+                <li>2nd review: Day 3</li>
+                <li>3rd review: Day 7</li>
+                <li>4th review: Day 14, and so on.</li>
+              </ul>
+            </div>
+            <div class="card-image">
+              <img src="Images/pic7.jpg" alt="Study setup" />
+            </div>
+          </div>
+          <div class="card-arrows">
+            <button type="button" class="arrow-button" data-target="#card4">◀</button>
+            <button type="button" class="arrow-button" data-target="#card6">▶</button>
+          </div>
+        </div>
+
+        <div id="card6" class="flashcard card-step">
+          <h2 class="card-title">STEP 3</h2>
+          <div class="card-body">
+            <div class="card-text">
+              <h3><strong>Rate your memory strength</strong></h3>
+              <p>After reviewing each card, rate how well you remembered it. Mark the ones you forgot as "hard" or "again," and the ones you remembered easily as "good" or "easy." This controls how often they appear again.</p>
+            </div>
+            <div class="card-image">
+              <img src="Images/pic6.jpg" alt="Study setup" />
+            </div>
+          </div>
+          <div class="card-arrows">
+            <button type="button" class="arrow-button" data-target="#card5">◀</button>
+            <button type="button" class="arrow-button" data-target="#card7">▶</button>
+          </div>
+        </div>
+
+        <div id="card7" class="flashcard card-step">
+          <h2 class="card-title">STEP 4</h2>
+          <div class="card-body">
+            <div class="card-text">
+              <h3><strong>Stay consistent</strong></h3>
+              <p>Set aside time each day for reviews. Even 10–15 minutes a day can produce amazing results over weeks.</p>
+            </div>
+            <div class="card-image">
+              <img src="Images/pic9.jpg" alt="Study setup" />
+            </div>
+          </div>
+          <div class="card-arrows">
+            <button type="button" class="arrow-button" data-target="#card6">◀</button>
+            <button type="button" class="arrow-button" data-target="#card8">▶</button>
+          </div>
+        </div>
+
+        <div id="card8" class="flashcard card-step">
+          <h2 class="card-title">STEP 5</h2>
+          <div class="card-body">
+            <div class="card-text">
+              <h3><strong>Update and grow your deck</strong></h3>
+              <p>As you cover new topics, keep adding them into your deck. Spaced Repetition becomes more powerful the longer you use it.</p>
+            </div>
+            <div class="card-image">
+              <img src="Images/pic8.jpg" alt="Study setup" />
+            </div>
+          </div>
+          <div class="card-arrows">
+            <button type="button" class="arrow-button" data-target="#card7">◀</button>
+            <button type="button" class="arrow-button" data-target="#card9">▶</button>
+          </div>
+        </div>
+
+        <div id="card9" class="flashcard">
+          <div class="card-center">
+            <p>Congratulations, you have mastered <strong>Spaced Repetition!</strong></p>
+            <p>(Click other study techniques below or click home to return home)</p>
+          </div>
+          <div class="arrows">
+            <button type="button" class="arrow-button" data-target="#card8">◀</button>
+            <button type="button" class="arrow-button" data-target="#card1">▶</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="tab-buttons">
+      <button type="button" class="tab" onclick="navigateTo('active-recall.html')">ACTIVE RECALL</button>
+      <button type="button" class="tab" onclick="navigateTo('pomodoro.html')">POMODORO</button>
+      <button type="button" class="tab active" onclick="navigateTo('spaced-repetition.html')">SPACED REPETITION</button>
+      <button type="button" class="tab" onclick="navigateTo('feynman.html')">FEYNMAN</button>
+      <button type="button" class="tab" onclick="navigateTo('interleaved-practice.html')">INTERLEAVED PRACTICE</button>
+    </div>
+
+    <div class="footer">
+      <div class="footer-links">
+        <button type="button" class="nav-button" onclick="navigateTo('AboutUS/abts.html')">About Us</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="profile-overlay" id="profileOverlay"></div>
+  <div class="profile-slide-menu" id="profileSlideMenu">
+    <button class="close-profile-menu">&times;</button>
+    <div class="profile-menu-content">
+      <button class="nav-button" onclick="navigateTo('account.html')">My Account</button>
+      <button class="nav-button" onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <script src="Scripts/techniques.js"></script>
+  <script>
+    function navigateTo(url) {
+      window.location.href = url;
+    }
+    function logout() {
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>

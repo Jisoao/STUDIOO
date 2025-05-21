@@ -1,0 +1,75 @@
+body {
+  background: linear-gradient(to right, #000000, #2f2f2f, #000000);
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+}
+
+
+.quote-section {
+  margin: 0 0 70px;
+  padding: 70px 80px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.quote-left {
+  flex: 1;
+  min-width: 300px;
+}
+
+.quote-left h1 {
+  font-size: 60px;
+  font-weight: 600;
+  margin: 0 0 20px;
+  line-height: 1.2;
+}
+
+.subtext {
+  font-size: 20px;
+  color: #bfbfbf;
+  font-weight: 500;
+}
+
+.quote-right {
+  flex-shrink: 0;
+  margin-right: 80px;
+}
+
+.GTS {
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 14px 28px;
+  border: 1px solid white;
+  border-radius: 10px;
+  color: rgb(255, 255, 255);
+  background: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.GTS:hover {
+  background-color: white;
+  color: black;
+}
+
+.study-images {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 0 80px 60px;
+  background: linear-gradient(to right, #000000, #2f2f2f, #000000);
+  flex-wrap: wrap;
+  cursor: pointer;
+}
+
+.study-images img {
+  width: 400px;
+  height: 300px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+

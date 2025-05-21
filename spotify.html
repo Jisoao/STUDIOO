@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Spotify Login</title>
+  <link rel="stylesheet" href="Styles/Header.css" />
+  <link rel="stylesheet" href="Styles/techniques.css" />
+  <script type="module" src="Scripts/nav.js" defer></script>
+  <style>
+    body {
+      background: radial-gradient(circle, #222 0%, #111 100%);
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', Arial, sans-serif;
+    }
+    .spotify-bar-btn {
+      display: flex;
+      align-items: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: #222;
+      font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+      text-decoration: none;
+      box-shadow: none;
+    }
+    .spotify-bar-btn img {
+      width: 32px;
+      height: 32px;
+      margin-right: 10px;
+    }
+    .spotify-card {
+      margin: 200px auto 0 ;
+      background: #fff;
+      border-radius: 36px;
+      min-width: 900px;
+      min-height: 500px;
+      display: flex;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      padding: 48px 32px;
+      align-items: center;
+      justify-content: center;
+      gap: 68px;
+    }
+    .spotify-player-illustration {
+      width: 260px;
+      height: 380px;
+      background: url('Images/spotify-player.png') no-repeat center center/contain;
+      display: block;
+    }
+    .spotify-login-form {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      min-width: 320px;
+      max-width: 400px;
+    }
+    .spotify-login-form h2 {
+      font-size: 1.3rem;
+      font-weight: 400;
+      margin-bottom: 32px;
+      color: #222;
+    }
+    .spotify-login-form input {
+      width: 100%;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+      border: 2px solid #bbb;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: #fafafa;
+      color: #222;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .spotify-login-form input:focus {
+      border: 2px solid #1db954;
+    }
+    .spotify-login-form .forgot {
+      font-size: 0.95rem;
+      color: #444;
+      margin-bottom: 18px;
+      text-decoration: underline;
+      cursor: pointer;
+      align-self: flex-end;
+    }
+    .spotify-login-form button[type="submit"] {
+      width: 100%;
+      padding: 12px 0;
+      background: #1db954;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 12px;
+      transition: background 0.2s;
+    }
+    .spotify-login-form button[type="submit"]:hover {
+      background: #169c43;
+    }
+    .spotify-login-form .signup-link {
+      font-size: 0.98rem;
+      color: #222;
+      margin-top: 8px;
+      text-align: center;
+      width: 100%;
+    }
+    .spotify-login-form .signup-link a {
+      color: #1db954;
+      text-decoration: underline;
+      margin-left: 4px;
+    }
+    .back-arrow {
+      font-size: 2rem;
+      color: #222;
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin-bottom: 18px;
+      margin-left: 8px;
+    }
+    @media (max-width: 900px) {
+      .spotify-card {
+        flex-direction: column;
+        gap: 24px;
+        padding: 32px 8px;
+      }
+      .spotify-player-illustration {
+        width: 180px;
+        height: 220px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="nav-links">
+      <button class="nav-button" id="logo" onclick="navigateTo('homepage.html')">STUDio</button>
+      <button class="nav-button" onclick="navigateTo('homepage.html')">Home</button>
+      <button class="nav-button" onclick="navigateTo('techniques.html')">Techniques</button>
+      <button class="nav-button" onclick="navigateTo('progress.html')">Progress</button>
+      <button class="nav-button" onclick="navigateTo('AboutUS/abts.html')">About</button>
+    </div>
+    <div class="profile-menu-container">
+      <img src="Images/user.png" alt="Profile" class="profile-icon-img" />
+    </div>
+  </div>
+
+  <div class="spotify-card">
+    <div class="spotify-player-illustration"></div>
+    <form class="spotify-login-form">
+      <button class="back-arrow" type="button" onclick="window.history.back()">&#x21A9;</button>
+      <h2>Link Spotify Account</h2>
+      <input type="email" placeholder="EMAIL" required />
+      <input type="password" placeholder="PASSWORD" required />
+      <a class="forgot" href="#">Forgot Password</a>
+      <button type="submit">LOG IN</button>
+      <div class="signup-link">
+        No account? Click to <a href="#">Sign Up</a>
+      </div>
+    </form>
+  </div>
+
+  <div class="footer">
+    <div class="footer-links">
+      <button type="button" class="nav-button" onclick="navigateTo('AboutUS/abts.html')">About Us</button>
+    </div>
+  </div>
+  <script src="Scripts/spotify.js"></script>
+</body>
+</html> 

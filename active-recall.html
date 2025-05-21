@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>STUDio | Active Recall</title>
+  <link rel="stylesheet" href="Styles/Header.css" />
+  <link rel="stylesheet" href="Styles/techniques.css" />
+  <script type="module" src="Scripts/nav.js" defer></script>
+  <script src="Scripts/spotify.js"></script>
+  <script src="Scripts/techniques.js"></script>
+</head>
+<body>
+  <div class="header">
+    <div class="nav-links">
+      <button class="nav-button" id="logo" onclick="navigateTo('homepage.html')">STUDio</button>
+      <button class="nav-button" onclick="navigateTo('homepage.html')">Home</button>
+      <button class="nav-button" onclick="navigateTo('techniques.html')">Techniques</button>
+      <button class="nav-button" onclick="navigateTo('progress.html')">Progress</button>
+      <button class="nav-button" onclick="navigateTo('AboutUS/abts.html')">About</button>
+    </div>
+    <div class="profile-menu-container">
+      <img src="Images/user.png" alt="Profile" class="profile-icon-img" />
+    </div>
+  </div>
+
+  <div class="main-content">
+    <div class="cards">
+      <div id="card1" class="flashcard">
+        <div id="music-ui" class="spotify-bar-container">
+          <!-- Music UI will be rendered here by techniques.js -->
+        </div>
+        <div class="card-center">
+          <p><strong>Active Recall</strong> is one of the most effective, science-backed study techniques. Rather than passively rereading notes or textbooks, Active Recall pushes your brain to retrieve information without prompts. This mental effort <strong>strengthens memory and improves retention</strong>.</p>
+        </div>
+        <div class="arrows">
+          <button type="button" class="arrow-button" data-target="#card2">➤</button>
+        </div>
+      </div>
+
+      <div id="card2" class="flashcard">
+        <div class="card-center1">
+          <h2 class="flashcard-title">STRUCTURE</h2>
+          <p><strong>Ideal For:</strong> Memorizing concepts, formulas, definitions, processes</p>
+          <p><strong>Tools:</strong> Flashcards (physical or digital), notebooks, quiz apps</p>
+          <p><strong>Time Required:</strong> Flexible, best in short focused sessions</p>
+          <p><strong>Complements:</strong> Spaced Repetition, Pomodoro</p>
+        </div>
+        <div class="arrows">
+          <button type="button" class="arrow-button" data-target="#card1">◀</button>
+          <button type="button" class="arrow-button" data-target="#card3">➤</button>
+        </div>
+      </div>
+
+      <div id="card3" class="flashcard">
+        <div class="card-center">
+          <h2 class="flashcard-title">Steps to Master Active Recall</h2>
+        </div>
+        <div class="arrows">
+          <button type="button" class="arrow-button" data-target="#card2">◀</button>
+          <button type="button" class="arrow-button" data-target="#card4">➤</button>
+        </div>
+      </div>
+
+      <div id="card4" class="flashcard card-step">
+        <h2 class="card-title">STEP 1</h2>
+        <div class="card-body">
+          <div class="card-text">
+            <h3><strong>Study the material intentionally.</strong></h3>
+            <p>Read through a topic thoroughly, but avoid highlighting aimlessly. Focus on understanding rather than memorizing. Use diagrams or concept maps to help with comprehension.</p>
+          </div>
+          <div class="card-image">
+            <img src="Images/pic3.jpg" alt="Study setup" />
+          </div>
+        </div>
+        <div class="card-arrows">
+          <button type="button" class="arrow-button" data-target="#card3">◀</button>
+          <button type="button" class="arrow-button" data-target="#card5">▶</button>
+        </div>
+      </div>
+
+      <div id="card5" class="flashcard card-step">
+        <h2 class="card-title">STEP 2</h2>
+        <div class="card-body">
+          <div class="card-text">
+            <h3><strong>Close your materials and recall what you remember</strong></h3>
+            <p>Without looking at your notes, try to write down or say everything you remember. This could be definitions, processes, key points, or even drawings. This forces your brain to retrieve data, which strengthens memory.</p>
+          </div>
+          <div class="card-image">
+            <img src="Images/pic2.jpg" alt="Study setup" />
+          </div>
+        </div>
+        <div class="card-arrows">
+          <button type="button" class="arrow-button" data-target="#card4">◀</button>
+          <button type="button" class="arrow-button" data-target="#card6">▶</button>
+        </div>
+      </div>
+
+      <div id="card6" class="flashcard card-step">
+        <h2 class="card-title">STEP 3</h2>
+        <div class="card-body">
+          <div class="card-text">
+            <h3><strong>Check your accuracy</strong></h3>
+            <p>Compare your recall with the original source. Highlight what you missed or misunderstood. These gaps are your focus points for the next session.</p>
+          </div>
+          <div class="card-image">
+            <img src="Images/pic1.jpg" alt="Study setup" />
+          </div>
+        </div>
+        <div class="card-arrows">
+          <button type="button" class="arrow-button" data-target="#card5">◀</button>
+          <button type="button" class="arrow-button" data-target="#card7">▶</button>
+        </div>
+      </div>
+
+      <div id="card7" class="flashcard card-step">
+        <h2 class="card-title">STEP 4</h2>
+        <div class="card-body">
+          <div class="card-text">
+            <h3><strong>Repeat recall regularly</strong></h3>
+            <p>Don't just do it once. Test yourself again after a few hours, the next day, or in combination with Spaced Repetition. Each attempt strengthens your neural pathways.</p>
+          </div>
+          <div class="card-image">
+            <img src="Images/pic4.jpg" alt="Study setup" />
+          </div>
+        </div>
+        <div class="card-arrows">
+          <button type="button" class="arrow-button" data-target="#card6">◀</button>
+          <button type="button" class="arrow-button" data-target="#card8">▶</button>
+        </div>
+      </div>
+
+      <div id="card8" class="flashcard card-step">
+        <h2 class="card-title">STEP 5</h2>
+        <div class="card-body">
+          <div class="card-text">
+            <h3><strong>Use active tools</strong></h3>
+            <p>Use apps like Gizmo or Quizlet, or simply turn your notes into Q&A form. Make sure you're recalling actively—not just re-reading answers.</p>
+          </div>
+          <div class="card-image">
+            <img src="Images/pic7.jpg" alt="Study setup" />
+          </div>
+        </div>
+        <div class="card-arrows">
+          <button type="button" class="arrow-button" data-target="#card7">◀</button>
+          <button type="button" class="arrow-button" data-target="#card9">▶</button>
+        </div>
+      </div>
+
+      <div id="card9" class="flashcard">
+        <div class="card-center">
+          <p>Congratulations, you have mastered <strong>Active Recall!</strong></p>
+          <p>(Click other study techniques below or click home to return home)</p>
+        </div>
+        <div class="arrows">
+          <button type="button" class="arrow-button" data-target="#card8">◀</button>
+          <button type="button" class="arrow-button" data-target="#card1">▶</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-buttons">
+    <button type="button" class="tab active" onclick="navigateTo('active-recall.html')">ACTIVE RECALL</button>
+    <button type="button" class="tab" onclick="navigateTo('pomodoro.html')">POMODORO</button>
+    <button type="button" class="tab" onclick="navigateTo('spaced-repetition.html')">SPACED REPETITION</button>
+    <button type="button" class="tab" onclick="navigateTo('feynman.html')">FEYNMAN</button>
+    <button type="button" class="tab" onclick="navigateTo('interleaved-practice.html')">INTERLEAVED PRACTICE</button>
+  </div>
+
+  <div class="footer">
+    <div class="footer-links">
+      <button type="button" class="nav-button" onclick="navigateTo('AboutUS/abts.html')">About Us</button>
+    </div>
+  </div>
+
+  <div class="profile-overlay" id="profileOverlay"></div>
+  <div class="profile-slide-menu" id="profileSlideMenu">
+    <button class="close-profile-menu">&times;</button>
+    <div class="profile-menu-content">
+      <button class="nav-button" onclick="navigateTo('account.html')">My Account</button>
+      <button class="nav-button" onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <script>
+    function navigateTo(url) {
+      window.location.href = url;
+    }
+    function logout() {
+      window.location.href = 'index.html';
+    }
+
+    // Initialize music UI when the page loads
+    window.addEventListener('load', async () => {
+      console.log('Page loaded, initializing music UI...');
+      try {
+        const isLoggedIn = await isUserLoggedIn();
+        console.log('Login status:', isLoggedIn);
+        await renderMusicUI();
+      } catch (error) {
+        console.error('Error initializing music UI:', error);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Study Techniques</title>
+  <link rel="stylesheet" href="Styles/Header.css" />
+  <link rel="stylesheet" href="Styles/Homepage.css" />
+  <link rel="stylesheet" href="Styles/Footer.css" />
+  <link rel="stylesheet" href="Styles/nav.css">
+  <script type="module" src="Scripts/nav.js" defer></script>
+</head>
+<body>
+  <!-- Navigation Header -->
+  <div class="header">
+    <div class="nav-links">
+      <button class="nav-button" id="logo" onclick="navigateTo('homepage.html')">STUDio</button>
+      <button class="nav-button" onclick="navigateTo('homepage.html')">Home</button>
+      <button class="nav-button" onclick="navigateTo('techniques.html')">Techniques</button>
+      <button class="nav-button" onclick="navigateTo('progress.html')">Progress</button>
+      <button class="nav-button" onclick="navigateTo('AboutUS/abts.html')">About</button>
+    </div>
+    <div class="profile-menu-container">
+      <img src="Images/user.png" alt="Profile" class="profile-icon-img" />
+    </div>
+  </div>
+
+  <!-- Grid Layout -->
+  <div class="main-content">
+    <div class="container">
+      <!-- Left Part -->
+      <div class="left-column">
+        <p class="quote">STUDio</p>
+        <p class="descrp">
+          Still stuck rereading notes and forgetting everything later? Discover 5 proven study techniques that actually work — and transform the way you learn, starting today!
+        </p>
+        <div class="image-box">
+          <img src="Images/pic4.jpg" alt="Study Techniques Image" />
+        </div>
+      </div>
+      <!-- Right Part -->
+      <div class="right-column">
+        <p>Choose one Technique to Master...</p>
+        <button class="technique-button" onclick="navigateTo('active-recall.html')">ACTIVE RECALL</button>
+        <button class="technique-button" onclick="navigateTo('pomodoro.html')">POMODORO</button>
+        <button class="technique-button" onclick="navigateTo('spaced-repetition.html')">SPACED REPETITION</button>
+        <button class="technique-button" onclick="navigateTo('feynman.html')">FEYNMAN</button>
+        <button class="technique-button" onclick="navigateTo('interleaved-practice.html')">INTERLEAVED PRACTICE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <button class="footer-button" onclick="navigateTo('AboutUS/abts.html')">About Us</button>
+  </div>
+
+  <div class="profile-overlay" id="profileOverlay"></div>
+  <div class="profile-slide-menu" id="profileSlideMenu">
+    <button class="close-profile-menu">&times;</button>
+    <div class="profile-menu-content">
+      <button class="nav-button" onclick="navigateTo('account.html')">My Account</button>
+      <button class="nav-button" onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <script>
+    function navigateTo(url) {
+      window.location.href = url;
+    }
+    function logout() {
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>
