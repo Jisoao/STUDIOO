@@ -2,9 +2,12 @@ function navigateTo(url) {
   window.location.href = url;
 }
 
-const cards = document.querySelectorAll('.flashcard');
+// Removed global cards variable
+// const cards = document.querySelectorAll('.flashcard');
 
 function showCardById(cardId) {
+  // Select cards inside the function to ensure DOM is ready
+  const cards = document.querySelectorAll('.flashcard');
   cards.forEach(card => {
     card.style.display = card.id === cardId ? 'block' : 'none';
   });
@@ -34,55 +37,56 @@ async function isUserLoggedIn() {
   }
 }
 
+// Function to render the music UI based on Spotify login status
 async function renderMusicUI() {
-  try {
-    const container = document.getElementById("music-ui");
-    if (!container) return; // Exit if container doesn't exist
-    
-    container.innerHTML = ""; // Clear previous content
+  const container = document.getElementById("music-ui");
+  if (!container) return; // Exit if container doesn't exist
 
-    const isLoggedIn = await isUserLoggedIn();
-    if (!isLoggedIn) {
-      // Not logged in – show the "Play some music?" button
-      container.innerHTML = `
-        <button onclick="navigateTo('spotify.html')" class="spotify-bar-btn">
-          <img src="Images/social.png" alt="Spotify"> Play some music?
-        </button>
-      `;
-    } else {
-      // Logged in – show both search and genre selection
-      container.innerHTML = `
-        <div class="music-loggedin-ui">
-          <div class="search-section">
-            <input type="text" id="songSearch" placeholder="Search for a song..." />
-            <button onclick="searchMusic()">Search</button>
-          </div>
-          
-          <div class="genre-section">
-            <select id="genreSelect" onchange="handleGenreChange()">
-              <option value="">Select a Genre</option>
-              <option value="lofi">Lo-Fi Beats</option>
-              <option value="classical">Classical Piano</option>
-              <option value="ambient">Ambient Study</option>
-              <option value="jazz">Jazz for Focus</option>
-              <option value="nature">Nature Sounds</option>
-              <option value="instrumental">Instrumental Study</option>
-              <option value="electronic">Electronic Focus</option>
-              <option value="rain">Rain Sounds</option>
-              <option value="cafe">Cafe Ambience</option>
-              <option value="meditation">Meditation Music</option>
-              <option value="white-noise">White Noise</option>
-              <option value="binaural">Binaural Beats</option>
-            </select>
-            <button onclick="playSelectedGenre()">Play Genre</button>
-          </div>
+  container.innerHTML = ""; // Clear previous content
+
+  const accessToken = await validateToken(); // Use validateToken from spotify.js
+
+  if (accessToken) {
+    // User is logged in - show the search bar
+    container.innerHTML = `
+      <div class="music-loggedin-ui">
+        <div class="search-section">
+          <input type="text" id="songSearch" placeholder="Search for a song..." />
+          <button onclick="searchMusic()">Search</button>
         </div>
-      `;
-    }
-  } catch (error) {
-    console.error('Error rendering music UI:', error);
+        
+        <div class="genre-section">
+          <select id="genreSelect" onchange="handleGenreChange()">
+            <option value="">Select a Genre</option>
+            <option value="lofi">Lo-Fi Beats</option>
+            <option value="classical">Classical Piano</option>
+            <option value="ambient">Ambient Study</option>
+            <option value="jazz">Jazz for Focus</option>
+            <option value="nature">Nature Sounds</option>
+            <option value="instrumental">Instrumental Study</option>
+            <option value="electronic">Electronic Focus</option>
+            <option value="rain">Rain Sounds</option>
+            <option value="cafe">Cafe Ambience</option>
+            <option value="meditation">Meditation Music</option>
+            <option value="white-noise">White Noise</option>
+            <option value="binaural">Binaural Beats</option>
+          </select>
+          <button onclick="playSelectedGenre()">Play Genre</button>
+        </div>
+      </div>
+    `;
+  } else {
+    // Not logged in - show the "Play some music?" button
+    container.innerHTML = `
+      <button onclick="navigateTo('spotify.html')" class="spotify-bar-btn">
+        <img src="Images/social.png" alt="Spotify"> Play some music?
+      </button>
+    `;
   }
 }
+
+// Make searchMusic function globally available if not already
+window.searchMusic = searchMusic;
 
 function searchMusic() {
   const query = document.getElementById("songSearch")?.value;

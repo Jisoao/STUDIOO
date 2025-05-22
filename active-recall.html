@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="Styles/Header.css" />
   <link rel="stylesheet" href="Styles/techniques.css" />
   <script type="module" src="Scripts/nav.js" defer></script>
-  <script src="Scripts/spotify.js"></script>
   <script src="Scripts/techniques.js"></script>
 </head>
 <body>
@@ -24,11 +23,14 @@
     </div>
   </div>
 
+  <!-- New button here -->
+  <button id="myNewButton" onclick="navigateTo('spotify.html')">Play Some Music?</button>
+
   <div class="main-content">
     <div class="cards">
       <div id="card1" class="flashcard">
         <div id="music-ui" class="spotify-bar-container">
-          <!-- Music UI will be rendered here by techniques.js -->
+          <!-- Music UI will be rendered here by JavaScript -->
         </div>
         <div class="card-center">
           <p><strong>Active Recall</strong> is one of the most effective, science-backed study techniques. Rather than passively rereading notes or textbooks, Active Recall pushes your brain to retrieve information without prompts. This mental effort <strong>strengthens memory and improves retention</strong>.</p>
@@ -190,18 +192,6 @@
     function logout() {
       window.location.href = 'index.html';
     }
-
-    // Initialize music UI when the page loads
-    window.addEventListener('load', async () => {
-      console.log('Page loaded, initializing music UI...');
-      try {
-        const isLoggedIn = await isUserLoggedIn();
-        console.log('Login status:', isLoggedIn);
-        await renderMusicUI();
-      } catch (error) {
-        console.error('Error initializing music UI:', error);
-      }
-    });
   </script>
 </body>
 </html>

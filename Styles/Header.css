@@ -18,6 +18,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  display: flex;
   padding: 16px 2%;
   color: #ffffff;
   width: 100%;
@@ -33,6 +34,12 @@ body {
   display: flex;
   gap: 1rem;
   align-items: center;
+}
+
+/* Default state for hamburger menu - hidden on desktop */
+.hamburger-btn,
+.menu-dropdown {
+  display: none;
 }
 
 .nav-button {
@@ -160,6 +167,11 @@ body {
 }
 
 /* --- Slide Profile Menu & Overlay --- */
+.profile-overlay,
+.profile-slide-menu {
+  display: none;
+}
+
 .profile-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -172,6 +184,7 @@ body {
 .profile-overlay.open {
   opacity: 1;
   pointer-events: auto;
+  display: block; /* Ensure it's displayed when open */
 }
 
 .profile-slide-menu {
@@ -183,12 +196,12 @@ body {
   box-shadow: -2px 0 16px rgba(0,0,0,0.4);
   z-index: 1300;
   transition: right 0.3s;
-  display: flex;
   flex-direction: column;
   padding: 32px 24px 24px 24px;
 }
 .profile-slide-menu.open {
   right: 0;
+  display: flex; /* Ensure it's displayed as flex when open */
 }
 
 .close-profile-menu {
@@ -207,4 +220,59 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+}
+
+/* Media query for smaller screens (e.g., mobile) */
+@media (max-width: 768px) {
+  .nav-links {
+    /* Hide standard nav links on mobile */
+    display: none;
+  }
+
+  .hamburger-btn {
+    /* Show hamburger button on mobile */
+    display: block;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1050; /* Ensure it's above other content */
+  }
+
+  .menu-dropdown {
+    /* Style for the mobile dropdown menu */
+    position: absolute;
+    top: 80px; /* Below the fixed header */
+    left: 0;
+    width: 100%;
+    background-color: #181818; /* Dark background */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    transition: all 0.3s ease-in-out;
+    /* Initially hidden off-screen */
+    transform: translateY(-100%);
+    visibility: hidden;
+    opacity: 0;
+    z-index: 1040;
+  }
+
+  .menu-dropdown.show {
+    /* State when mobile menu is active */
+    transform: translateY(0);
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .menu-dropdown .nav-button {
+    /* Style individual links in the mobile menu */
+    width: 100%;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 1.2rem;
+  }
 }

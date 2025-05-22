@@ -6,17 +6,13 @@
   <title>Study Techniques</title>
   <link rel="stylesheet" href="../Styles/abts.css">
   <link rel="stylesheet" href="../Styles/Header.css">
-  <style>
-    /* Resources Table Styling */
-
-  </style>
 </head>
 <body>
   <div class="wrapper">
     <!-- Header -->
     <div class="header">
       <div class="nav-links">
-        <button type="button" id="logo" class="nav-button" onclick="navigateTo('../index.html')">STUDio</button>
+        <button type="button" id="logo" class="nav-button" onclick="navigateTo('../homepage.html')">STUDio</button>
         <button type="button" class="nav-button" onclick="navigateTo('../homepage.html')">Home</button>
         <button type="button" class="nav-button" onclick="navigateTo('abts.html')">About Us</button>
       </div>
@@ -92,6 +88,10 @@
     </div>
   </div>
 
-  <script src="../techniques.js"></script>
+  <script>
+    function navigateTo(url) {
+      window.location.href = url;
+    }
+  </script>
 </body>
 </html>

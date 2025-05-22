@@ -2,7 +2,7 @@
 
 // Spotify API Configuration
 const SPOTIFY_CLIENT_ID = '6efa8e49fdf64e0c9c6161b3951d1e77'; // Replace with your Spotify app client ID
-const SPOTIFY_REDIRECT_URI = 'http://127.0.0.1:5502/homepage.html'; // Must match your Spotify app settings
+const SPOTIFY_REDIRECT_URI = 'http://127.0.0.1:5500/homepage.html'; // Must match your Spotify app settings
 const SPOTIFY_SCOPES = [
   'user-read-private',
   'user-read-email',
@@ -120,7 +120,7 @@ function checkForAccessToken() {
     alert('Successfully connected to Spotify!');
     
     // Redirect to homepage after successful login
-    window.location.href = 'homepage.html';
+    window.location.href = 'active-recall.html';
   } else if (window.location.search.includes('error')) {
     const error = new URLSearchParams(window.location.search).get('error');
     alert(`Spotify authentication failed: ${error}`);
