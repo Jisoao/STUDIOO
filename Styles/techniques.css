@@ -92,6 +92,15 @@ body {
   backface-visibility: hidden;
 }
 
+.flashcard:not(.active-card) {
+  display: none;
+}
+
+.flashcard.active-card {
+  display: flex;
+  flex-direction: column;
+}
+
 .flashcard-title {
   text-align: center;
   font-size: 38px;
@@ -280,8 +289,9 @@ body {
 }
 
 .card-text {
-  width: 400px;
+  max-width: 400px;
   margin-right: 20px;
+  flex-shrink: 1;
 }
 
 .card-text h3 {
@@ -302,11 +312,12 @@ body {
 }
 
 .card-image img {
-  width: 300px;
-  height: 300px;
+  max-width: 300px;
+  max-height: 300px;
   object-fit: cover;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  flex-shrink: 1;
 }
 
 .arrow-button {

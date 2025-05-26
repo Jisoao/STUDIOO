@@ -2,34 +2,81 @@ function navigateTo(url) {
   window.location.href = url;
 }
 
-// Removed global cards variable
-// const cards = document.querySelectorAll('.flashcard');
-
+// Function to show a specific card by its ID within the active technique
 function showCardById(cardId) {
-  // Select cards inside the function to ensure DOM is ready
-  const cards = document.querySelectorAll('.flashcard');
-  cards.forEach(card => {
-    card.style.display = card.id === cardId ? 'block' : 'none';
+  console.log('showCardById called with ID:', cardId);
+  const activeTechniqueContent = document.querySelector('#technique-display-area .technique-content.active');
+  if (!activeTechniqueContent) {
+    console.log('No active technique content found.');
+    return;
+  }
+
+  const cards = activeTechniqueContent.querySelectorAll('.flashcard');
+  cards.forEach(card => card.classList.remove('active-card'));
+  console.log('Removed active-card from all cards in the active technique.');
+
+  const targetCard = document.querySelector(cardId);
+  if (targetCard) {
+    targetCard.classList.add('active-card');
+    console.log('Successfully showed card with ID:', cardId);
+  } else {
+    console.log('Target card not found with ID:', cardId);
+  }
+  console.log('Current active cards:', activeTechniqueContent.querySelectorAll('.flashcard.active-card').length);
+}
+
+// Function to toggle the visible technique section
+function toggleTechnique(techniqueId) {
+  console.log('toggleTechnique called with ID:', techniqueId);
+  
+  // Hide the initial homepage content
+  const homepageContainer = document.querySelector('.main-content > .container');
+  if (homepageContainer) {
+    homepageContainer.style.display = 'none';
+    console.log('Hid homepage initial container.');
+  }
+
+  const allTechniques = document.querySelectorAll('.technique-content');
+  allTechniques.forEach(section => {
+    section.classList.remove('active');
+    section.querySelectorAll('.flashcard').forEach(card => card.classList.remove('active-card'));
   });
+  console.log('Removed active class from all techniques and active-card from all their cards.');
+
+  const targetSection = document.getElementById(techniqueId);
+  if (targetSection) {
+    targetSection.classList.add('active');
+    console.log(`Activated technique section: ${techniqueId}`);
+    const firstCard = targetSection.querySelector('.flashcard');
+    if (firstCard) {
+      firstCard.classList.add('active-card');
+      console.log(`Activated technique: ${techniqueId}, first card: ${firstCard.id}`);
+    } else {
+      console.log(`No flashcard found in ${techniqueId}`);
+    }
+  } else {
+    console.log(`Technique with ID '${techniqueId}' not found.`);
+  }
+  console.log('Current active technique section:', document.querySelectorAll('.technique-content.active').length);
+  const activeTech = document.querySelector('.technique-content.active');
+  if (activeTech) {
+    console.log('Active cards in current active technique:', activeTech.querySelectorAll('.flashcard.active-card').length);
+  }
 }
 
 async function isUserLoggedIn() {
   try {
     const spotifyToken = localStorage.getItem('spotifyAccessToken');
     const expiryTime = localStorage.getItem('spotifyTokenExpiry');
-    
-    if (!spotifyToken || !expiryTime) {
-      return false;
-    }
-    
-    // Check if token is expired
+
+    if (!spotifyToken || !expiryTime) return false;
+
     if (Date.now() > parseInt(expiryTime)) {
-      // Clear expired token
       localStorage.removeItem('spotifyAccessToken');
       localStorage.removeItem('spotifyTokenExpiry');
       return false;
     }
-    
+
     return true;
   } catch (error) {
     console.error('Error checking login status:', error);
@@ -37,24 +84,21 @@ async function isUserLoggedIn() {
   }
 }
 
-// Function to render the music UI based on Spotify login status
 async function renderMusicUI() {
   const container = document.getElementById("music-ui");
-  if (!container) return; // Exit if container doesn't exist
+  if (!container) return;
 
-  container.innerHTML = ""; // Clear previous content
+  container.innerHTML = "";
 
-  const accessToken = await validateToken(); // Use validateToken from spotify.js
+  const accessToken = await validateToken(); // defined in spotify.js
 
   if (accessToken) {
-    // User is logged in - show the search bar
     container.innerHTML = `
       <div class="music-loggedin-ui">
         <div class="search-section">
           <input type="text" id="songSearch" placeholder="Search for a song..." />
           <button onclick="searchMusic()">Search</button>
         </div>
-        
         <div class="genre-section">
           <select id="genreSelect" onchange="handleGenreChange()">
             <option value="">Select a Genre</option>
@@ -76,7 +120,6 @@ async function renderMusicUI() {
       </div>
     `;
   } else {
-    // Not logged in - show the "Play some music?" button
     container.innerHTML = `
       <button onclick="navigateTo('spotify.html')" class="spotify-bar-btn">
         <img src="Images/social.png" alt="Spotify"> Play some music?
@@ -85,7 +128,6 @@ async function renderMusicUI() {
   }
 }
 
-// Make searchMusic function globally available if not already
 window.searchMusic = searchMusic;
 
 function searchMusic() {
@@ -105,50 +147,58 @@ function handleGenreChange() {
 
 function playSelectedGenre() {
   const genre = document.getElementById("genreSelect")?.value;
-  if (genre) {
-    // Updated playlist IDs with more curated study music playlists
-    const genreMap = {
-      'lofi': '37i9dQZF1DXc8kgYqQLMfH', // Lo-Fi Beats
-      'classical': '37i9dQZF1DX4OjfOte3n6a', // Peaceful Piano
-      'ambient': '37i9dQZF1DX3Ogo9pFvBkY', // Ambient Relaxation
-      'jazz': '37i9dQZF1DX0BcQWzuB7ZO', // Jazz Vibes
-      'nature': '37i9dQZF1DX4OjfOte3n6a', // Nature Sounds
-      'instrumental': '37i9dQZF1DX4OjfOte3n6a', // Instrumental Study
-      'electronic': '37i9dQZF1DX3Ogo9pFvBkY', // Electronic Focus
-      'rain': '37i9dQZF1DX4OjfOte3n6a', // Rain Sounds
-      'cafe': '37i9dQZF1DX4OjfOte3n6a', // Cafe Ambience
-      'meditation': '37i9dQZF1DX4OjfOte3n6a', // Meditation Music
-      'white-noise': '37i9dQZF1DX4OjfOte3n6a', // White Noise
-      'binaural': '37i9dQZF1DX4OjfOte3n6a' // Binaural Beats
-    };
-    
-    const playlistId = genreMap[genre];
-    if (playlistId) {
-      window.open(`https://open.spotify.com/playlist/${playlistId}`, "_blank");
-    } else {
-      // Fallback to search if no playlist ID is found
-      window.open(`https://open.spotify.com/search/${genre}%20study%20music`, "_blank");
-    }
+  const genreMap = {
+    'lofi': '37i9dQZF1DXc8kgYqQLMfH',
+    'classical': '37i9dQZF1DX4sWSpwq3LiO',
+    'ambient': '37i9dQZF1DX4E3UdUs7fUx',
+    'jazz': '37i9dQZF1DX0BcQWzuB7ZO',
+    'nature': '37i9dQZF1DWXe9gFZP0gtP',
+    'instrumental': '37i9dQZF1DX4sWSpwq3LiO',
+    'electronic': '37i9dQZF1DX4dyzvuaRJ0n',
+    'rain': '37i9dQZF1DX8ymr6UES7vc',
+    'cafe': '37i9dQZF1DX6ziVCJnEm59',
+    'meditation': '37i9dQZF1DWZqd5JICZI0u',
+    'white-noise': '37i9dQZF1DWX83CujKHHOn',
+    'binaural': '37i9dQZF1DX3oM43CtKnRV'
+  };
+
+  const playlistId = genreMap[genre];
+  if (playlistId) {
+    window.open(`https://open.spotify.com/playlist/${playlistId}`, "_blank");
+  } else {
+    window.open(`https://open.spotify.com/search/${genre}%20study%20music`, "_blank");
   }
 }
 
-// Initialize the page
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    showCardById('card1');
+    // Initially hide all technique sections
+    document.querySelectorAll('#technique-display-area .technique-content').forEach(content => {
+      content.classList.remove('active');
+      content.querySelectorAll('.flashcard').forEach(card => card.classList.remove('active-card'));
+    });
 
-    const arrowButtons = document.querySelectorAll('.arrow-button');
-    arrowButtons.forEach(button => {
-      const target = button.getAttribute('data-target');
-      if (target) {
-        button.addEventListener('click', () => {
-          showCardById(target.replace('#', ''));
-        });
+    // Show default or first technique section
+    const firstTechnique = document.querySelector('.technique-content');
+    if (firstTechnique) {
+      firstTechnique.classList.add('active');
+      const firstCard = firstTechnique.querySelector('.flashcard');
+      if (firstCard) firstCard.classList.add('active-card');
+    }
+
+    // Delegate click handling for arrows and technique buttons
+    document.addEventListener('click', event => {
+      if (event.target.classList.contains('arrow-button')) {
+        const targetCardId = event.target.getAttribute('data-target');
+        if (targetCardId) showCardById(targetCardId);
+      } else if (event.target.classList.contains('technique-button')) {
+        const techniqueId = event.target.getAttribute('data-technique');
+        if (techniqueId) toggleTechnique(techniqueId);
       }
     });
 
-    await renderMusicUI(); // Render music bar based on login state
+    await renderMusicUI();
   } catch (error) {
-    console.error('Error initializing page:', error);
+    console.error('Error during initialization:', error);
   }
 });

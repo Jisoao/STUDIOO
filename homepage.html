@@ -8,7 +8,56 @@
   <link rel="stylesheet" href="Styles/Homepage.css" />
   <link rel="stylesheet" href="Styles/Footer.css" />
   <link rel="stylesheet" href="Styles/nav.css">
-  <script type="module" src="Scripts/nav.js" defer></script>
+  <link rel="stylesheet" href="Styles/techniques.css">
+  <style>
+    /* Styles for the left and right columns on the homepage */
+    .main-content > .container {
+        display: flex;
+        gap: 20px;
+    }
+
+    .left-column {
+        flex: 1;
+    }
+
+    .right-column {
+        flex: 1;
+    }
+
+    .technique-content {
+      display: none; /* Initially hide technique content */
+    }
+
+    .technique-content.active {
+      display: block; /* Display active technique content */
+    }
+
+    .technique-button {
+      width: 100%;
+      padding: 15px;
+      margin: 10px 0;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .technique-button:hover {
+      background: #45a049;
+    }
+
+    .technique-button.active {
+      background: #357abd;
+    }
+
+    /* Ensure active card is displayed using flex as per techniques.css */
+    .flashcard.active-card {
+      display: flex;
+    }
+
+  </style>
 </head>
 <body>
   <!-- Navigation Header -->
@@ -41,11 +90,631 @@
       <!-- Right Part -->
       <div class="right-column">
         <p>Choose one Technique to Master...</p>
-        <button class="technique-button" onclick="navigateTo('active-recall.html')">ACTIVE RECALL</button>
-        <button class="technique-button" onclick="navigateTo('pomodoro.html')">POMODORO</button>
-        <button class="technique-button" onclick="navigateTo('spaced-repetition.html')">SPACED REPETITION</button>
-        <button class="technique-button" onclick="navigateTo('feynman.html')">FEYNMAN</button>
-        <button class="technique-button" onclick="navigateTo('interleaved-practice.html')">INTERLEAVED PRACTICE</button>
+        <button class="technique-button" data-technique="active-recall">ACTIVE RECALL</button>
+        <button class="technique-button" data-technique="pomodoro">POMODORO</button>
+        <button class="technique-button" data-technique="spaced-repetition">SPACED REPETITION</button>
+        <button class="technique-button" data-technique="feynman">FEYNMAN</button>
+        <button class="technique-button" data-technique="interleaved">INTERLEAVED PRACTICE</button>
+      </div>
+    </div>
+
+    <!-- Area to display selected technique content -->
+    <div id="technique-display-area" class="technique-display-area">
+      <div id="active-recall" class="technique-content">
+        <div class="cards">
+          <div id="ar-card1" class="flashcard active-card">
+            <div id="music-ui" class="spotify-bar-container">
+              <!-- Music UI will be rendered here by JavaScript -->
+            </div>
+            <div class="card-center">
+              <p><strong>Active Recall</strong> is one of the most effective, science-backed study techniques. Rather than passively rereading notes or textbooks, Active Recall pushes your brain to retrieve information without prompts. This mental effort <strong>strengthens memory and improves retention</strong>.</p>
+            </div>
+            <div class="arrows">
+              <button type="button" class="arrow-button" data-target="#ar-card2">➤</button>
+            </div>
+          </div>
+
+          <div id="ar-card2" class="flashcard">
+            <div class="card-center1">
+              <h2 class="flashcard-title">STRUCTURE</h2>
+              <p><strong>Ideal For:</strong> Memorizing concepts, formulas, definitions, processes</p>
+              <p><strong>Tools:</strong> Flashcards (physical or digital), notebooks, quiz apps</p>
+              <p><strong>Time Required:</strong> Flexible, best in short focused sessions</p>
+              <p><strong>Complements:</strong> Spaced Repetition, Pomodoro</p>
+            </div>
+            <div class="arrows">
+              <button type="button" class="arrow-button" data-target="#ar-card1">◀</button>
+              <button type="button" class="arrow-button" data-target="#ar-card3">➤</button>
+            </div>
+          </div>
+
+          <div id="ar-card3" class="flashcard">
+            <div class="card-center">
+              <h2 class="flashcard-title">Steps to Master Active Recall</h2>
+            </div>
+            <div class="arrows">
+              <button type="button" class="arrow-button" data-target="#ar-card2">◀</button>
+              <button type="button" class="arrow-button" data-target="#ar-card4">➤</button>
+            </div>
+          </div>
+
+          <div id="ar-card4" class="flashcard card-step">
+            <h2 class="card-title">STEP 1</h2>
+            <div class="card-body">
+              <div class="card-text">
+                <h3><strong>Study the material intentionally.</strong></h3>
+                <p>Read through a topic thoroughly, but avoid highlighting aimlessly. Focus on understanding rather than memorizing. Use diagrams or concept maps to help with comprehension.</p>
+              </div>
+              <div class="card-image">
+                <img src="Images/pic3.jpg" alt="Study setup" />
+              </div>
+            </div>
+            <div class="card-arrows">
+              <button type="button" class="arrow-button" data-target="#ar-card3">◀</button>
+              <button type="button" class="arrow-button" data-target="#ar-card5">▶</button>
+            </div>
+          </div>
+
+          <div id="ar-card5" class="flashcard card-step">
+            <h2 class="card-title">STEP 2</h2>
+            <div class="card-body">
+              <div class="card-text">
+                <h3><strong>Close your materials and recall what you remember</strong></h3>
+                <p>Without looking at your notes, try to write down or say everything you remember. This could be definitions, processes, key points, or even drawings. This forces your brain to retrieve data, which strengthens memory.</p>
+              </div>
+              <div class="card-image">
+                <img src="Images/pic2.jpg" alt="Study setup" />
+              </div>
+            </div>
+            <div class="card-arrows">
+              <button type="button" class="arrow-button" data-target="#ar-card4">◀</button>
+              <button type="button" class="arrow-button" data-target="#ar-card6">▶</button>
+            </div>
+          </div>
+
+          <div id="ar-card6" class="flashcard card-step">
+            <h2 class="card-title">STEP 3</h2>
+            <div class="card-body">
+              <div class="card-text">
+                <h3><strong>Check your accuracy</strong></h3>
+                <p>Compare your recall with the original source. Highlight what you missed or misunderstood. These gaps are your focus points for the next session.</p>
+              </div>
+              <div class="card-image">
+                <img src="Images/pic1.jpg" alt="Study setup" />
+              </div>
+            </div>
+            <div class="card-arrows">
+              <button type="button" class="arrow-button" data-target="#ar-card5">◀</button>
+              <button type="button" class="arrow-button" data-target="#ar-card7">▶</button>
+            </div>
+          </div>
+
+          <div id="ar-card7" class="flashcard card-step">
+            <h2 class="card-title">STEP 4</h2>
+            <div class="card-body">
+              <div class="card-text">
+                <h3><strong>Repeat recall regularly</strong></h3>
+                <p>Don't just do it once. Test yourself again after a few hours, the next day, or in combination with Spaced Repetition. Each attempt strengthens your neural pathways.</p>
+              </div>
+              <div class="card-image">
+                <img src="Images/pic4.jpg" alt="Study setup" />
+              </div>
+            </div>
+            <div class="card-arrows">
+              <button type="button" class="arrow-button" data-target="#ar-card6">◀</button>
+              <button type="button" class="arrow-button" data-target="#ar-card8">▶</button>
+            </div>
+          </div>
+
+          <div id="ar-card8" class="flashcard card-step">
+            <h2 class="card-title">STEP 5</h2>
+            <div class="card-body">
+              <div class="card-text">
+                <h3><strong>Use active tools</strong></h3>
+                <p>Use apps like Gizmo or Quizlet, or simply turn your notes into Q&A form. Make sure you're recalling actively—not just re-reading answers.</p>
+              </div>
+              <div class="card-image">
+                <img src="Images/pic7.jpg" alt="Study setup" />
+              </div>
+            </div>
+            <div class="card-arrows">
+              <button type="button" class="arrow-button" data-target="#ar-card7">◀</button>
+              <button type="button" class="arrow-button" data-target="#ar-card9">▶</button>
+            </div>
+          </div>
+
+          <div id="ar-card9" class="flashcard">
+            <div class="card-center">
+              <p>Congratulations, you have mastered <strong>Active Recall!</strong></p>
+              <p>(Click other study techniques below or click home to return home)</p>
+            </div>
+            <div class="arrows">
+              <button type="button" class="arrow-button" data-target="#ar-card8">◀</button>
+              <button type="button" class="arrow-button" data-target="#ar-card1">▶</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="pomodoro" class="technique-content">
+        <div class="cards">
+          <div id="pom-card1" class="flashcard active-card">
+            <div class="card-center">
+              <p>This <strong>Pomodoro Technique</strong> boosts focus by using 25-minute intervals of work, separated by short breaks. It prevents burnout and enhances productivity.</p>
+            </div>
+            <div class="arrows">
+              <button type="button" class="arrow-button" data-target="#pom-card2">➤</button>
+            </div>
+          </div>
+
+          <div id="pom-card2" class="flashcard">
+            <div class="card-center1">
+              <h2 class="flashcard-title">STRUCTURE</h2>
+              <p><strong>Ideal For:</strong> Focused study, writing, solving problems</p>
+              <p><strong>Tools:</strong> Timer, apps like Forest or Focus Keeper</p>
+              <p><strong>Time Required:</strong> 25 minutes + 5 min break</p>
+              <p><strong>Complements:</strong> Active Recall</p>
+            </div>
+            <div class="arrows">
+              <button type="button" class="arrow-button" data-target="#pom-card1">◀</button>
+              <button type="button" class="arrow-button" data-target="#pom-card3">➤</button>
+            </div>
+          </div>
+
+          <div id="pom-card3" class="flashcard">
+            <div class="card-center">
+              <h2 class="flashcard-title">Steps to Master Pomodoro</h2>
+            </div>
+            <div class="arrows">
+              <button type="button" class="arrow-button" data-target="#pom-card2">◀</button>
+              <button type="button" class="arrow-button" data-target="#pom-card4">➤</button>
+            </div>
+          </div>
+
+          <div id="pom-card4" class="flashcard card-step">
+            <h2 class="card-title">STEP 1</h2>
+            <div class="card-body">
+              <div class="card-text">
+                <h3><strong>Choose a specific task</strong></h3>
+                <p>Pick exactly what you're going to work on—be specific.</p>
+              </div>
+              <div class="card-image">
+                <img src="Images/pic2.jpg" alt="Study setup" />
+              </div>
+            </div>
+            <div class="card-arrows">
+              <button type="button" class="arrow-button" data-target="#pom-card3">◀</button>
+              <button type="button" class="arrow-button" data-target="#pom-card5">▶</button>
+            </div>
+          </div>
+
+          <div id="pom-card5" class="flashcard card-step">
+            <h2 class="card-title">STEP 2</h2>
+            <div class="card-body">
+              <div class="card-text">
+                <h3><strong>Set a 25-minute timer</strong></h3>
+                <p>Focus solely on your task until the timer rings.</p>
+              </div>
+              <div class="card-image">
+                <img src="Images/pic12.jpg" alt="Timer setup" />
+              </div>
+            </div>
+            <div class="card-arrows">
+              <button type="button" class="arrow-button" data-target="#pom-card4">◀</button>
+              <button type="button" class="arrow-button" data-target="#pom-card6">▶</button>
+            </div>
+          </div>
+
+          <div id="pom-card6" class="flashcard card-step">
+            <h2 class="card-title">STEP 3</h2>
+            <div class="card-body">
+              <div class="card-text">
+                <h3><strong>Work with full focus</strong></h3>
+                <p>Ignore distractions. Jot down any that come to mind and return to them later.</p>
+              </div>
+              <div class="card-image">
+                <img src="Images/pic11.jpg" alt="Focused work" />
+              </div>
+            </div>
+            <div class="card-arrows">
+              <button type="button" class="arrow-button" data-target="#pom-card5">◀</button>
+              <button type="button" class="arrow-button" data-target="#pom-card7">▶</button>
+            </div>
+          </div>
+
+          <div id="pom-card7" class="flashcard card-step">
+            <h2 class="card-title">STEP 4</h2>
+            <div class="card-body">
+              <div class="card-text">
+                <h3><strong>Take a 5-minute break</strong></h3>
+                <p>Relax and recharge. Walk, stretch, or rest your eyes.</p>
+              </div>
+              <div class="card-image">
+                <img src="Images/pic14.jpg" alt="Short break" />
+              </div>
+            </div>
+            <div class="card-arrows">
+              <button type="button" class="arrow-button" data-target="#pom-card6">◀</button>
+              <button type="button" class="arrow-button" data-target="#pom-card8">▶</button>
+            </div>
+          </div>
+
+          <div id="pom-card8" class="flashcard card-step">
+            <h2 class="card-title">STEP 5</h2>
+            <div class="card-body">
+              <div class="card-text">
+                <h3><strong>Take a longer break after 4 Pomodoros</strong></h3>
+                <p>Rest for 15–30 minutes to recover and retain energy.</p>
+              </div>
+              <div class="card-image">
+                <img src="Images/pic5.jpg" alt="Long break" />
+              </div>
+            </div>
+            <div class="card-arrows">
+              <button type="button" class="arrow-button" data-target="#pom-card7">◀</button>
+              <button type="button" class="arrow-button" data-target="#pom-card9">▶</button>
+            </div>
+          </div>
+
+          <div id="pom-card9" class="flashcard">
+            <div class="card-center">
+              <p>Congratulations, you have mastered <strong>Pomodoro!</strong></p>
+              <p>(Click other study techniques below or click home to return home)</p>
+            </div>
+            <div class="arrows">
+              <button type="button" class="arrow-button" data-target="#pom-card8">◀</button>
+              <button type="button" class="arrow-button" data-target="#pom-card1">▶</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="spaced-repetition" class="technique-content">
+        <div class="cards">
+          <div id="sr-card1" class="flashcard active-card">
+            <div class="card-center">
+              <p><strong>Spaced Repetition</strong> is a learning technique that involves reviewing information at increasing intervals to optimize long-term retention.</p>
+            </div>
+            <div class="arrows">
+              <button type="button" class="arrow-button" data-target="#sr-card2">➤</button>
+            </div>
+          </div>
+
+          <div id="sr-card2" class="flashcard">
+            <div class="card-center1">
+              <h2 class="flashcard-title">STRUCTURE</h2>
+              <p><strong>Ideal For:</strong> Long-term memorization, language learning, medical studies</p>
+              <p><strong>Tools:</strong> Anki, SuperMemo, physical flashcards</p>
+              <p><strong>Time Required:</strong> Daily short review sessions</p>
+              <p><strong>Complements:</strong> Active Recall, Interleaved Practice</p>
+            </div>
+            <div class="arrows">
+              <button type="button" class="arrow-button" data-target="#sr-card1">◀</button>
+              <button type="button" class="arrow-button" data-target="#sr-card3">➤</button>
+            </div>
+          </div>
+
+          <div id="sr-card3" class="flashcard">
+            <div class="card-center">
+              <h2 class="flashcard-title">Steps to Master Spaced Repetition</h2>
+            </div>
+            <div class="arrows">
+              <button type="button" class="arrow-button" data-target="#sr-card2">◀</button>
+              <button type="button" class="arrow-button" data-target="#sr-card4">➤</button>
+            </div>
+          </div>
+
+          <div id="sr-card4" class="flashcard card-step">
+            <h2 class="card-title">STEP 1</h2>
+            <div class="card-body">
+              <div class="card-text">
+                <h3><strong>Create your study materials</strong></h3>
+                <p>Convert your study material into question-answer pairs or flashcards. Make them clear and concise.</p>
+              </div>
+              <div class="card-image">
+                <img src="Images/pic3.jpg" alt="Study materials" />
+              </div>
+            </div>
+            <div class="card-arrows">
+              <button type="button" class="arrow-button" data-target="#sr-card3">◀</button>
+              <button type="button" class="arrow-button" data-target="#sr-card5">▶</button>
+            </div>
+          </div>
+
+          <div id="sr-card5" class="flashcard card-step">
+            <h2 class="card-title">STEP 2</h2>
+            <div class="card-body">
+              <div class="card-text">
+                <h3><strong>Initial learning</strong></h3>
+                <p>Learn the material thoroughly for the first time. Make sure you understand the concepts before moving to spaced review.</p>
+              </div>
+              <div class="card-image">
+                <img src="Images/pic2.jpg" alt="Initial learning" />
+              </div>
+            </div>
+            <div class="card-arrows">
+              <button type="button" class="arrow-button" data-target="#sr-card4">◀</button>
+              <button type="button" class="arrow-button" data-target="#sr-card6">▶</button>
+            </div>
+          </div>
+
+          <div id="sr-card6" class="flashcard card-step">
+            <h2 class="card-title">STEP 3</h2>
+            <div class="card-body">
+              <div class="card-text">
+                <h3><strong>Review schedule</strong></h3>
+                <p>Review the material at increasing intervals: 1 day, 3 days, 7 days, 14 days, 30 days, etc. Adjust intervals based on your performance.</p>
+              </div>
+              <div class="card-image">
+                <img src="Images/pic1.jpg" alt="Review schedule" />
+              </div>
+            </div>
+            <div class="card-arrows">
+              <button type="button" class="arrow-button" data-target="#sr-card5">◀</button>
+              <button type="button" class="arrow-button" data-target="#sr-card7">▶</button>
+            </div>
+          </div>
+
+          <div id="sr-card7" class="flashcard card-step">
+            <h2 class="card-title">STEP 4</h2>
+            <div class="card-body">
+              <div class="card-text">
+                <h3><strong>Track progress</strong></h3>
+                <p>Keep track of which items you find difficult and which you've mastered. Focus more on the challenging items.</p>
+              </div>
+              <div class="card-image">
+                <img src="Images/pic4.jpg" alt="Track progress" />
+              </div>
+            </div>
+            <div class="card-arrows">
+              <button type="button" class="arrow-button" data-target="#sr-card6">◀</button>
+              <button type="button" class="arrow-button" data-target="#sr-card8">▶</button>
+            </div>
+          </div>
+
+          <div id="sr-card8" class="flashcard">
+            <div class="card-center">
+              <p>Congratulations, you have mastered <strong>Spaced Repetition!</strong></p>
+              <p>(Click other study techniques below or click home to return home)</p>
+            </div>
+            <div class="arrows">
+              <button type="button" class="arrow-button" data-target="#sr-card7">◀</button>
+              <button type="button" class="arrow-button" data-target="#sr-card1">▶</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="feynman" class="technique-content">
+        <div class="cards">
+          <div id="fey-card1" class="flashcard active-card">
+            <div class="card-center">
+              <p>The <strong>Feynman Technique</strong> is a method of learning that involves explaining concepts in simple terms to ensure deep understanding.</p>
+            </div>
+            <div class="arrows">
+              <button type="button" class="arrow-button" data-target="#fey-card2">➤</button>
+            </div>
+          </div>
+
+          <div id="fey-card2" class="flashcard">
+            <div class="card-center1">
+              <h2 class="flashcard-title">STRUCTURE</h2>
+              <p><strong>Ideal For:</strong> Understanding complex concepts, preparing for teaching</p>
+              <p><strong>Tools:</strong> Whiteboard, paper, recording device</p>
+              <p><strong>Time Required:</strong> 20-30 minutes per concept</p>
+              <p><strong>Complements:</strong> Active Recall, Spaced Repetition</p>
+            </div>
+            <div class="arrows">
+              <button type="button" class="arrow-button" data-target="#fey-card1">◀</button>
+              <button type="button" class="arrow-button" data-target="#fey-card3">➤</button>
+            </div>
+          </div>
+
+          <div id="fey-card3" class="flashcard">
+            <div class="card-center">
+              <h2 class="flashcard-title">Steps to Master Feynman Technique</h2>
+            </div>
+            <div class="arrows">
+              <button type="button" class="arrow-button" data-target="#fey-card2">◀</button>
+              <button type="button" class="arrow-button" data-target="#fey-card4">➤</button>
+            </div>
+          </div>
+
+          <div id="fey-card4" class="flashcard card-step">
+            <h2 class="card-title">STEP 1</h2>
+            <div class="card-body">
+              <div class="card-text">
+                <h3><strong>Choose a concept</strong></h3>
+                <p>Select a concept you want to learn and write it down at the top of a blank page.</p>
+              </div>
+              <div class="card-image">
+                <img src="Images/pic3.jpg" alt="Choose concept" />
+              </div>
+            </div>
+            <div class="card-arrows">
+              <button type="button" class="arrow-button" data-target="#fey-card3">◀</button>
+              <button type="button" class="arrow-button" data-target="#fey-card5">▶</button>
+            </div>
+          </div>
+
+          <div id="fey-card5" class="flashcard card-step">
+            <h2 class="card-title">STEP 2</h2>
+            <div class="card-body">
+              <div class="card-text">
+                <h3><strong>Explain it simply</strong></h3>
+                <p>Write an explanation of the concept as if you were teaching it to someone who has no background in the subject.</p>
+              </div>
+              <div class="card-image">
+                <img src="Images/pic2.jpg" alt="Explain concept" />
+              </div>
+            </div>
+            <div class="card-arrows">
+              <button type="button" class="arrow-button" data-target="#fey-card4">◀</button>
+              <button type="button" class="arrow-button" data-target="#fey-card6">▶</button>
+            </div>
+          </div>
+
+          <div id="fey-card6" class="flashcard card-step">
+            <h2 class="card-title">STEP 3</h2>
+            <div class="card-body">
+              <div class="card-text">
+                <h3><strong>Identify gaps</strong></h3>
+                <p>Review your explanation and identify any areas where you struggled to explain clearly or had to use complex language.</p>
+              </div>
+              <div class="card-image">
+                <img src="Images/pic1.jpg" alt="Identify gaps" />
+              </div>
+            </div>
+            <div class="card-arrows">
+              <button type="button" class="arrow-button" data-target="#fey-card5">◀</button>
+              <button type="button" class="arrow-button" data-target="#fey-card7">▶</button>
+            </div>
+          </div>
+
+          <div id="fey-card7" class="flashcard card-step">
+            <h2 class="card-title">STEP 4</h2>
+            <div class="card-body">
+              <div class="card-text">
+                <h3><strong>Simplify and review</strong></h3>
+                <p>Go back to the source material to fill in your knowledge gaps. Simplify your explanation further and review until you can explain it clearly.</p>
+              </div>
+              <div class="card-image">
+                <img src="Images/pic4.jpg" alt="Simplify and review" />
+              </div>
+            </div>
+            <div class="card-arrows">
+              <button type="button" class="arrow-button" data-target="#fey-card6">◀</button>
+              <button type="button" class="arrow-button" data-target="#fey-card8">▶</button>
+            </div>
+          </div>
+
+          <div id="fey-card8" class="flashcard">
+            <div class="card-center">
+              <p>Congratulations, you have mastered the <strong>Feynman Technique!</strong></p>
+              <p>(Click other study techniques below or click home to return home)</p>
+            </div>
+            <div class="arrows">
+              <button type="button" class="arrow-button" data-target="#fey-card7">◀</button>
+              <button type="button" class="arrow-button" data-target="#fey-card1">▶</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="interleaved" class="technique-content">
+        <div class="cards">
+          <div id="int-card1" class="flashcard active-card">
+            <div class="card-center">
+              <p><strong>Interleaved Practice</strong> involves mixing different topics or types of problems during study sessions to improve learning and retention.</p>
+            </div>
+            <div class="arrows">
+              <button type="button" class="arrow-button" data-target="#int-card2">➤</button>
+            </div>
+          </div>
+
+          <div id="int-card2" class="flashcard">
+            <div class="card-center1">
+              <h2 class="flashcard-title">STRUCTURE</h2>
+              <p><strong>Ideal For:</strong> Math, science, language learning, sports</p>
+              <p><strong>Tools:</strong> Mixed problem sets, flashcards, practice tests</p>
+              <p><strong>Time Required:</strong> Longer sessions than blocked practice</p>
+              <p><strong>Complements:</strong> Spaced Repetition, Active Recall</p>
+            </div>
+            <div class="arrows">
+              <button type="button" class="arrow-button" data-target="#int-card1">◀</button>
+              <button type="button" class="arrow-button" data-target="#int-card3">➤</button>
+            </div>
+          </div>
+
+          <div id="int-card3" class="flashcard">
+            <div class="card-center">
+              <h2 class="flashcard-title">Steps to Master Interleaved Practice</h2>
+            </div>
+            <div class="arrows">
+              <button type="button" class="arrow-button" data-target="#int-card2">◀</button>
+              <button type="button" class="arrow-button" data-target="#int-card4">➤</button>
+            </div>
+          </div>
+
+          <div id="int-card4" class="flashcard card-step">
+            <h2 class="card-title">STEP 1</h2>
+            <div class="card-body">
+              <div class="card-text">
+                <h3><strong>Identify related topics</strong></h3>
+                <p>Group related topics or skills that you want to practice together.</p>
+              </div>
+              <div class="card-image">
+                <img src="Images/pic3.jpg" alt="Identify topics" />
+              </div>
+            </div>
+            <div class="card-arrows">
+              <button type="button" class="arrow-button" data-target="#int-card3">◀</button>
+              <button type="button" class="arrow-button" data-target="#int-card5">▶</button>
+            </div>
+          </div>
+
+          <div id="int-card5" class="flashcard card-step">
+            <h2 class="card-title">STEP 2</h2>
+            <div class="card-body">
+              <div class="card-text">
+                <h3><strong>Create mixed practice sets</strong></h3>
+                <p>Create practice sets that mix different types of problems or topics randomly.</p>
+              </div>
+              <div class="card-image">
+                <img src="Images/pic2.jpg" alt="Create practice sets" />
+              </div>
+            </div>
+            <div class="card-arrows">
+              <button type="button" class="arrow-button" data-target="#int-card4">◀</button>
+              <button type="button" class="arrow-button" data-target="#int-card6">▶</button>
+            </div>
+          </div>
+
+          <div id="int-card6" class="flashcard card-step">
+            <h2 class="card-title">STEP 3</h2>
+            <div class="card-body">
+              <div class="card-text">
+                <h3><strong>Practice with variety</strong></h3>
+                <p>Work through the mixed problems, switching between different types of questions or topics.</p>
+              </div>
+              <div class="card-image">
+                <img src="Images/pic1.jpg" alt="Practice with variety" />
+              </div>
+            </div>
+            <div class="card-arrows">
+              <button type="button" class="arrow-button" data-target="#int-card5">◀</button>
+              <button type="button" class="arrow-button" data-target="#int-card7">▶</button>
+            </div>
+          </div>
+
+          <div id="int-card7" class="flashcard card-step">
+            <h2 class="card-title">STEP 4</h2>
+            <div class="card-body">
+              <div class="card-text">
+                <h3><strong>Review and adjust</strong></h3>
+                <p>Review your performance and adjust the difficulty and mix of problems based on your progress.</p>
+              </div>
+              <div class="card-image">
+                <img src="Images/pic4.jpg" alt="Review and adjust" />
+              </div>
+            </div>
+            <div class="card-arrows">
+              <button type="button" class="arrow-button" data-target="#int-card6">◀</button>
+              <button type="button" class="arrow-button" data-target="#int-card8">▶</button>
+            </div>
+          </div>
+
+          <div id="int-card8" class="flashcard">
+            <div class="card-center">
+              <p>Congratulations, you have mastered <strong>Interleaved Practice!</strong></p>
+              <p>(Click other study techniques below or click home to return home)</p>
+            </div>
+            <div class="arrows">
+              <button type="button" class="arrow-button" data-target="#int-card7">◀</button>
+              <button type="button" class="arrow-button" data-target="#int-card1">▶</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -64,13 +733,41 @@
     </div>
   </div>
 
+  <script src="Scripts/techniques.js"></script>
+  <script src="Scripts/spotify.js"></script>
+  <script src="Scripts/profile.js"></script>
   <script>
-    function navigateTo(url) {
-      window.location.href = url;
-    }
-    function logout() {
-      window.location.href = 'index.html';
-    }
+    document.addEventListener("DOMContentLoaded", async () => {
+      try {
+        // Initially hide all technique sections
+        document.querySelectorAll('#technique-display-area .technique-content').forEach(content => {
+          content.classList.remove('active');
+          content.querySelectorAll('.flashcard').forEach(card => card.classList.remove('active-card'));
+        });
+
+        // Delegate click handling for arrows and technique buttons
+        document.addEventListener('click', event => {
+          if (event.target.classList.contains('arrow-button')) {
+            const targetCardId = event.target.getAttribute('data-target');
+            if (targetCardId) {
+              console.log('Arrow button clicked, target:', targetCardId);
+              showCardById(targetCardId);
+            }
+          } else if (event.target.classList.contains('technique-button')) {
+            const techniqueId = event.target.getAttribute('data-technique');
+            if (techniqueId) {
+              console.log('Technique button clicked, technique:', techniqueId);
+              toggleTechnique(techniqueId);
+            }
+          }
+        });
+
+        await renderMusicUI();
+      } catch (error) {
+        console.error('Error during initialization:', error);
+      }
+    });
   </script>
+
 </body>
 </html>
