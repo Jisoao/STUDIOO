@@ -1,6 +1,9 @@
 // Spotify API Configuration
 const SPOTIFY_CLIENT_ID = '6efa8e49fdf64e0c9c6161b3951d1e77'; 
-const SPOTIFY_REDIRECT_URI = 'http://127.0.0.1:5500/homepage.html'; 
+const SPOTIFY_REDIRECT_URI = 
+  window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost'
+    ? 'http://127.0.0.1:5500/homepage.html'
+    : 'https://jisoao.github.io/STUDIOO/homepage.html';
 const SPOTIFY_SCOPES = [
   'user-read-private',
   'user-read-email',
