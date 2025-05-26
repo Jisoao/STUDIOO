@@ -41,21 +41,11 @@ body {
   min-height: 100vh;
 }
 
-.main-content {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  width: 100%;
-  max-width: 1600px;
-  margin: 0 auto;
-  box-sizing: border-box;
-}
-
 .cards {
-  position: relative;
   width: 100%;
+  max-width: 980px;
+  margin: 0 auto; /* Center the cards */
+  position: relative;
 }
 
 @keyframes flashcardFlip {
@@ -73,11 +63,12 @@ body {
   background-color: white;
   color: black;
   width: 980px;
+  max-width: 980px;
   height: 520px;
   padding: 20px;
   padding-bottom: 80px;
   border-radius: 20px;
-  font-size: 16px;
+  font-size: 1.2rem;
   line-height: 1.4;
   box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.1);
   scroll-margin-top: 100px;
@@ -85,20 +76,26 @@ body {
   justify-content: flex-start;
   overflow-y: auto;
   overflow-x: hidden;
-  margin: 20px auto;
+  margin: -30px auto 10px;
   box-sizing: border-box;
   position: relative;
   animation: flashcardFlip 0.4s;
   backface-visibility: hidden;
 }
 
+.flashcard p{
+  font-size: 1.2rem;
+}
+
 .flashcard:not(.active-card) {
   display: none;
+  font-size: 1.2rem;
 }
 
 .flashcard.active-card {
   display: flex;
   flex-direction: column;
+  font-size: 1.2rem;
 }
 
 .flashcard-title {
@@ -118,92 +115,107 @@ body {
 }
 
 .spotify-bar-btn {
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
-  background: rgba(29, 185, 84, 0.1);
-  border: 2px solid #1db954;
+  justify-content: center;
+  background: none;
+  border: none;
   cursor: pointer;
-  font-size: 1.2rem;
-  color: #1db954;
-  font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
-  margin: 1rem auto;
-  max-width: 300px;
-}
-
-.spotify-bar-btn:hover {
-  transform: translateY(-2px);
-  background: rgba(29, 185, 84, 0.2);
-  box-shadow: 0 4px 15px rgba(29, 185, 84, 0.2);
+  color: white;
+  font-size: 16px;
 }
 
 .spotify-bar-btn img {
-  width: 32px;
-  height: 32px;
-  margin-right: 12px;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
 }
 
 .music-loggedin-ui {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
   width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  padding: 15px;
+  box-sizing: border-box;
+  color: white;
+}
+
+.music-loggedin-ui h3 {
+  margin: 0 0 10px 0;
+  color: white;
 }
 
 .search-section {
+  margin-bottom: 15px;
   display: flex;
-  gap: 0.75rem;
-  width: 100%;
+  gap: 10px;
+  align-items: center;
 }
 
-.search-section input[type="text"] {
-  flex: 1;
-  padding: 1rem 1.25rem;
-  border-radius: 12px;
-  border: 2px solid #1db954;
-  font-size: 1.1rem;
-  background: rgba(255, 255, 255, 0.9);
-  color: #333;
-  outline: none;
-  transition: all 0.3s ease;
+.search-section input {
+  flex-grow: 1;
+  padding: 8px;
+  margin-bottom: 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  vertical-align: middle;
+  background-color: #282828;
+  color: white;
 }
 
-.search-section input[type="text"]:focus {
-  border-color: #169c43;
-  box-shadow: 0 0 0 3px rgba(29, 185, 84, 0.2);
-  transform: translateY(-1px);
-}
-
-.search-section button,
-.genre-section button {
-  padding: 1rem 1.75rem;
-  border-radius: 12px;
-  background-color: #1db954;
+.search-section button {
+  width: auto;
+  padding: 8px 15px;
+  background: #1DB954;
   color: white;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
-  font-weight: bold;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  vertical-align: middle;
 }
 
-.search-section button:hover,
-.genre-section button:hover {
-  background-color: #169c43;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(29, 185, 84, 0.3);
+.search-section button:hover {
+  background: #1ed760;
+}
+
+#spotify-results-area {
+  max-height: 400px;
+  overflow-y: auto;
+  color: white;
+  padding: 0 10px;
+  margin: 0 -10px;
+}
+
+#spotify-results-area ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#spotify-results-area li {
+  padding: 8px 0;
+  border-bottom: 1px solid #444;
+  color: white;
+}
+
+#spotify-results-area li:last-child {
+  border-bottom: none;
+}
+
+#spotify-results-area a {
+  color: white !important;
+  text-decoration: none;
+  display: block;
+}
+
+#spotify-results-area a:hover {
+  color: #1DB954;
+  text-decoration: underline;
+}
+
+#spotify-results-area strong {
+    color: white !important;
 }
 
 .genre-section {
@@ -237,15 +249,14 @@ body {
   transform: translateY(-1px);
 }
 
-/* Styles for the new button */
 #myNewButton {
-  display: block; /* Make it a block element to control margin */
-  margin: 30px auto 10px; /* Adjusted: more top margin (30px), less bottom margin (10px), centered horizontally */
+  display: block;
+  margin: 30px auto 10px;
   padding: 10px 20px;
-  background-color: #0d6916; /* Dark background */
+  background-color: #0d6916;
   color: white;
   border: none;
-  border-radius: 8px; /* Rounded corners */
+  border-radius: 8px;
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.3s ease;
@@ -301,7 +312,7 @@ body {
 }
 
 .card-text p {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.5;
   color: #333;
   margin-bottom: 20px;
@@ -309,11 +320,13 @@ body {
 
 .card-image {
   margin-left: 20px;
+  width: 350px;
+  height: 300px;
 }
 
 .card-image img {
-  max-width: 300px;
-  max-height: 300px;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: cover;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -346,6 +359,8 @@ body {
   width: 100%;
   max-width: 1600px;
   box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
 }
 
 .tab {
@@ -359,6 +374,7 @@ body {
   transition: all 0.3s ease;
   border: 1px solid transparent;
   white-space: nowrap;
+  width: 200px;
 }
 
 .tab.active {
@@ -391,6 +407,48 @@ body {
   display: flex;
   justify-content: center;
   gap: 30px;
+}
+
+#bottom-technique-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    margin: 20px;
+    margin-left: 2%;
+}
+
+#bottom-technique-buttons .technique-button {
+    width: auto;
+    flex: 0 1 auto;
+    margin: 0 5px;
+    padding: 10px 20px;
+    background-color: transparent;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    box-shadow: #000;
+}
+
+#bottom-technique-buttons .technique-button:hover {
+    background: #ffffff;
+    color: rgb(0, 0, 0);
+    transform: translateY(-5px);
+    transition: background 0.6s;
+    box-shadow: #000;
+}
+
+#bottom-technique-buttons .technique-button.active {
+    background: #ffffff;
+    color: #000000;
+    transition: background 0.6s;
+    box-shadow: 10px #000000;
 }
 
 @media (max-width: 1024px) {
@@ -431,4 +489,234 @@ body {
     font-size: 1rem;
     padding: 0.75rem 1rem;
   }
+
+  .flashcard {
+    width: 95%;
+    max-width: none;
+    height: auto;
+    min-height: 400px;
+    padding: 15px;
+    margin: 15px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .flashcard p, .card-text p {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .flashcard-title, .card-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  .card-body {
+    flex-direction: column;
+    gap: 20px;
+    padding: 0;
+    width: 100%;
+    align-items: center;
+  }
+
+  .card-text {
+    max-width: 100%;
+    margin-right: 0;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 0 10px;
+  }
+
+  .card-text h3 {
+    font-size: 20px;
+  }
+
+  .card-image {
+    width: 80%;
+    height: auto;
+    margin-left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .card-image img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .arrows, .card-arrows {
+    position: static;
+    margin-top: 20px;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 10px;
+  }
+
+  .arrow-button {
+    padding: 8px 15px;
+    font-size: 20px;
+  }
+
+  #bottom-technique-buttons {
+    gap: 10px;
+    padding: 15px;
+    margin: 20px auto;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  #bottom-technique-buttons .technique-button {
+     padding: 8px 15px;
+     font-size: 0.9rem;
+  }
+
+  .spotify-widget-area.expanded {
+    width: 90%;
+    max-width: 350px;
+    bottom: 10px;
+    right: 5%;
+    transform: translateX(0);
+    left: 5%;
+    box-sizing: border-box;
+  }
+
+  .spotify-widget-area.collapsed {
+    bottom: 10px;
+    right: 10px;
+  }
 }
+
+@media (max-width: 480px) {
+    .flashcard {
+        min-height: 350px;
+    }
+
+    .flashcard-title, .card-title {
+        font-size: 24px;
+    }
+
+    .card-text h3 {
+        font-size: 18px;
+    }
+
+    .card-image {
+        width: 95%;
+    }
+
+    .spotify-widget-area.expanded {
+        width: 95%;
+        right: 2.5%;
+        left: 2.5%;
+    }
+
+    .arrow-button {
+        font-size: 18px;
+        padding: 6px 12px;
+    }
+}
+
+#spotify-widget-area {
+    background-color: #181818;
+    color: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    margin-left: 20px;
+    flex-shrink: 0;
+}
+
+.technique-content.active {
+  display: block;
+  flex: 1 1 0%;
+  font-size: 1rem;
+  min-width: 300px;
+}
+
+/* Floating Spotify Player */
+.spotify-widget-area {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.spotify-widget-area.collapsed {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #1DB954;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.spotify-widget-area.collapsed:hover {
+  transform: scale(1.1);
+}
+
+.spotify-widget-area.collapsed .music-loggedin-ui {
+  display: none;
+}
+
+.spotify-widget-area.collapsed::before {
+  content: "♪";
+  color: white;
+  font-size: 24px;
+}
+
+.spotify-widget-area.expanded {
+  width: 300px;
+  height: auto;
+  border-radius: 10px;
+  background: black;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.spotify-widget-area.expanded .music-loggedin-ui {
+  display: block;
+  padding: 15px;
+}
+
+.lesson-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 20px;
+  max-width: 800px;
+  margin: 30px auto;
+}
+
+.lesson-button {
+  background: var(--card);
+  border: 1.5px solid #157575;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  color: var(--primary);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.lesson-button:nth-child(1) { animation-delay: 0.1s; }
+.lesson-button:nth-child(2) { animation-delay: 0.2s; }
+.lesson-button:nth-child(3) { animation-delay: 0.3s; }
+.lesson-button:nth-child(4) { animation-delay: 0.4s; }

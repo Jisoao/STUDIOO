@@ -43,6 +43,14 @@ function toggleTechnique(techniqueId) {
   });
   console.log('Removed active class from all techniques and active-card from all their cards.');
 
+  // Hide the bottom technique buttons by default
+  const bottomButtons = document.getElementById('bottom-technique-buttons');
+    if (bottomButtons) {
+        bottomButtons.style.display = 'none';
+        console.log('Hid bottom technique buttons.');
+    }
+
+  
   const targetSection = document.getElementById(techniqueId);
   if (targetSection) {
     targetSection.classList.add('active');
@@ -54,8 +62,20 @@ function toggleTechnique(techniqueId) {
     } else {
       console.log(`No flashcard found in ${techniqueId}`);
     }
+
+    // Show the bottom technique buttons
+    if (bottomButtons) {
+        bottomButtons.style.display = 'flex';
+        console.log('Showed bottom technique buttons.');
+    }
+
   } else {
     console.log(`Technique with ID '${techniqueId}' not found.`);
+    // If no technique is found (e.g., navigating to Home), show the initial homepage content
+     if (homepageContainer) {
+        homepageContainer.style.display = 'flex';
+        console.log('Showed homepage initial container.');
+    }
   }
   console.log('Current active technique section:', document.querySelectorAll('.technique-content.active').length);
   const activeTech = document.querySelector('.technique-content.active');
@@ -178,22 +198,26 @@ document.addEventListener("DOMContentLoaded", async () => {
       content.querySelectorAll('.flashcard').forEach(card => card.classList.remove('active-card'));
     });
 
-    // Show default or first technique section
-    const firstTechnique = document.querySelector('.technique-content');
-    if (firstTechnique) {
-      firstTechnique.classList.add('active');
-      const firstCard = firstTechnique.querySelector('.flashcard');
-      if (firstCard) firstCard.classList.add('active-card');
-    }
-
     // Delegate click handling for arrows and technique buttons
     document.addEventListener('click', event => {
       if (event.target.classList.contains('arrow-button')) {
         const targetCardId = event.target.getAttribute('data-target');
-        if (targetCardId) showCardById(targetCardId);
+        if (targetCardId) {
+          console.log('Arrow button clicked, target:', targetCardId);
+          showCardById(targetCardId);
+        }
       } else if (event.target.classList.contains('technique-button')) {
         const techniqueId = event.target.getAttribute('data-technique');
-        if (techniqueId) toggleTechnique(techniqueId);
+        if (techniqueId) {
+          console.log('Technique button clicked. ID:', techniqueId);
+          toggleTechnique(techniqueId);
+        }
+      } else if (event.target.classList.contains('step-nav-button')) { // Add listener for step navigation buttons
+          const targetCardId = event.target.getAttribute('data-target');
+          if (targetCardId) {
+              console.log('Step navigation button clicked, target:', targetCardId);
+              showCardById(targetCardId);
+          }
       }
     });
 

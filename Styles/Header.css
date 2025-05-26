@@ -18,7 +18,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  display: flex;
   padding: 16px 2%;
   color: #ffffff;
   width: 100%;
@@ -26,20 +25,17 @@ body {
   top: 0;
   left: 0;
   z-index: 1000;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
+  flex-wrap: wrap;
 }
 
 .nav-links {
   display: flex;
   gap: 1rem;
   align-items: center;
-}
-
-/* Default state for hamburger menu - hidden on desktop */
-.hamburger-btn,
-.menu-dropdown {
-  display: none;
+  flex-basis: auto;
+  flex-grow: 1;
 }
 
 .nav-button {
@@ -47,7 +43,7 @@ body {
   border: none;
   color: white;
   cursor: pointer;
-  font-size: 1.4rem; 
+  font-size: 1.4rem;
   padding: 0 1rem;
   height: 50px;
   white-space: nowrap;
@@ -75,7 +71,7 @@ body {
 }
 
 .modal {
-  display: none; /* Hidden by default */
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -85,7 +81,6 @@ body {
   z-index: 1001;
 }
 
-/* 🔧 Fix: show modal when 'open' class is added */
 .modal.open {
   display: flex;
   align-items: center;
@@ -156,123 +151,138 @@ body {
   background-color: #45a049;
 }
 
-.profile-icon-img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  cursor: pointer;
-  background: #333;
-  border: 2px solid #444;
-}
-
-/* --- Slide Profile Menu & Overlay --- */
-.profile-overlay,
-.profile-slide-menu {
-  display: none;
-}
-
-.profile-overlay {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 1200;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s;
-}
-.profile-overlay.open {
-  opacity: 1;
-  pointer-events: auto;
-  display: block; /* Ensure it's displayed when open */
-}
-
-.profile-slide-menu {
-  position: fixed;
-  top: 0; right: -320px;
-  width: 300px;
-  height: 100vh;
-  background: #181818;
-  box-shadow: -2px 0 16px rgba(0,0,0,0.4);
-  z-index: 1300;
-  transition: right 0.3s;
-  flex-direction: column;
-  padding: 32px 24px 24px 24px;
-}
-.profile-slide-menu.open {
-  right: 0;
-  display: flex; /* Ensure it's displayed as flex when open */
-}
-
-.close-profile-menu {
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 2rem;
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  cursor: pointer;
-}
-
-.profile-menu-content {
-  margin-top: 48px;
+/* Style for the new user info and logout controls */
+.user-auth-controls {
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  align-items: center;
+  gap: 15px;
+  flex-basis: auto;
+  flex-shrink: 0;
 }
 
-/* Media query for smaller screens (e.g., mobile) */
-@media (max-width: 768px) {
+.user-email-text {
+  color: white;
+  font-size: 1.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+
+#logout-button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+#logout-button:hover {
+  background-color: #d32f2f;
+}
+
+/* Adjust responsive styles for header */
+@media (max-width: 992px) {
   .nav-links {
-    /* Hide standard nav links on mobile */
-    display: none;
+    gap: 0.8rem;
   }
 
-  .hamburger-btn {
-    /* Show hamburger button on mobile */
-    display: block;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.8rem;
-    cursor: pointer;
-    padding: 10px;
-    z-index: 1050; /* Ensure it's above other content */
-  }
-
-  .menu-dropdown {
-    /* Style for the mobile dropdown menu */
-    position: absolute;
-    top: 80px; /* Below the fixed header */
-    left: 0;
-    width: 100%;
-    background-color: #181818; /* Dark background */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px 0;
-    transition: all 0.3s ease-in-out;
-    /* Initially hidden off-screen */
-    transform: translateY(-100%);
-    visibility: hidden;
-    opacity: 0;
-    z-index: 1040;
-  }
-
-  .menu-dropdown.show {
-    /* State when mobile menu is active */
-    transform: translateY(0);
-    visibility: visible;
-    opacity: 1;
-  }
-
-  .menu-dropdown .nav-button {
-    /* Style individual links in the mobile menu */
-    width: 100%;
-    text-align: center;
-    padding: 15px 0;
+  .nav-button {
     font-size: 1.2rem;
+    padding: 0 0.8rem;
+  }
+
+  #logo {
+    font-size: 1.5rem;
+  }
+
+  .user-email-text {
+    font-size: 1.1rem;
+    max-width: 120px;
+  }
+
+  #logout-button {
+    font-size: 0.9rem;
+    padding: 7px 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 2%;
+    height: auto;
+  }
+
+  .nav-links {
+    gap: 0.5rem;
+    flex-basis: 100%;
+    justify-content: center;
+  }
+
+  .nav-button {
+    font-size: 1rem;
+    padding: 5px 10px;
+    height: auto;
+  }
+
+  #logo {
+     font-size: 1.4rem;
+     margin-bottom: 0;
+  }
+
+  .user-auth-controls {
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    flex-basis: 100%;
+    justify-content: center;
+    margin-top: 5px;
+  }
+
+  .user-email-text {
+    font-size: 0.9rem;
+    max-width: 100px;
+  }
+
+  #logout-button {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .nav-links {
+     gap: 0.3rem;
+  }
+
+  .nav-button {
+    font-size: 0.9rem;
+    padding: 3px 8px;
+  }
+
+  #logo {
+    font-size: 1.2rem;
+  }
+
+  .user-email-text {
+    font-size: 0.8rem;
+    max-width: 70px;
+  }
+
+  #logout-button {
+    font-size: 0.7rem;
+    padding: 4px 8px;
   }
 }

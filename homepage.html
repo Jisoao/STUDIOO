@@ -7,57 +7,7 @@
   <link rel="stylesheet" href="Styles/Header.css" />
   <link rel="stylesheet" href="Styles/Homepage.css" />
   <link rel="stylesheet" href="Styles/Footer.css" />
-  <link rel="stylesheet" href="Styles/nav.css">
   <link rel="stylesheet" href="Styles/techniques.css">
-  <style>
-    /* Styles for the left and right columns on the homepage */
-    .main-content > .container {
-        display: flex;
-        gap: 20px;
-    }
-
-    .left-column {
-        flex: 1;
-    }
-
-    .right-column {
-        flex: 1;
-    }
-
-    .technique-content {
-      display: none; /* Initially hide technique content */
-    }
-
-    .technique-content.active {
-      display: block; /* Display active technique content */
-    }
-
-    .technique-button {
-      width: 100%;
-      padding: 15px;
-      margin: 10px 0;
-      background: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .technique-button:hover {
-      background: #45a049;
-    }
-
-    .technique-button.active {
-      background: #357abd;
-    }
-
-    /* Ensure active card is displayed using flex as per techniques.css */
-    .flashcard.active-card {
-      display: flex;
-    }
-
-  </style>
 </head>
 <body>
   <!-- Navigation Header -->
@@ -66,11 +16,12 @@
       <button class="nav-button" id="logo" onclick="navigateTo('homepage.html')">STUDio</button>
       <button class="nav-button" onclick="navigateTo('homepage.html')">Home</button>
       <button class="nav-button" onclick="navigateTo('techniques.html')">Techniques</button>
-      <button class="nav-button" onclick="navigateTo('progress.html')">Progress</button>
-      <button class="nav-button" onclick="navigateTo('AboutUS/abts.html')">About</button>
+      <button class="nav-button" id="about-us-nav-button" onclick="navigateTo('AboutUS/abts.html')">About</button>
     </div>
-    <div class="profile-menu-container">
-      <img src="Images/user.png" alt="Profile" class="profile-icon-img" />
+    <!-- User Info and Logout -->
+    <div class="user-auth-controls">
+      <span id="user-email" class="user-email-text"></span>
+      <button class="nav-button" id="logout-button">Logout</button>
     </div>
   </div>
 
@@ -79,12 +30,11 @@
     <div class="container">
       <!-- Left Part -->
       <div class="left-column">
-        <p class="quote">STUDio</p>
         <p class="descrp">
           Still stuck rereading notes and forgetting everything later? Discover 5 proven study techniques that actually work — and transform the way you learn, starting today!
         </p>
         <div class="image-box">
-          <img src="Images/pic4.jpg" alt="Study Techniques Image" />
+          <img src="Images/pic2.jpg" alt="Study Techniques Image" />
         </div>
       </div>
       <!-- Right Part -->
@@ -100,12 +50,14 @@
 
     <!-- Area to display selected technique content -->
     <div id="technique-display-area" class="technique-display-area">
+      <!-- Single floating Spotify player container -->
+      <div id="floating-spotify-player" class="spotify-widget-area">
+        <!-- Spotify UI will be rendered here by JavaScript -->
+      </div>
+
       <div id="active-recall" class="technique-content">
         <div class="cards">
           <div id="ar-card1" class="flashcard active-card">
-            <div id="music-ui" class="spotify-bar-container">
-              <!-- Music UI will be rendered here by JavaScript -->
-            </div>
             <div class="card-center">
               <p><strong>Active Recall</strong> is one of the most effective, science-backed study techniques. Rather than passively rereading notes or textbooks, Active Recall pushes your brain to retrieve information without prompts. This mental effort <strong>strengthens memory and improves retention</strong>.</p>
             </div>
@@ -408,7 +360,7 @@
             <h2 class="card-title">STEP 1</h2>
             <div class="card-body">
               <div class="card-text">
-                <h3><strong>Create your study materials</strong></h3>
+                <h3><strong>Create your study materials.</strong></h3>
                 <p>Convert your study material into question-answer pairs or flashcards. Make them clear and concise.</p>
               </div>
               <div class="card-image">
@@ -425,7 +377,7 @@
             <h2 class="card-title">STEP 2</h2>
             <div class="card-body">
               <div class="card-text">
-                <h3><strong>Initial learning</strong></h3>
+                <h3><strong>Initial learning.</strong></h3>
                 <p>Learn the material thoroughly for the first time. Make sure you understand the concepts before moving to spaced review.</p>
               </div>
               <div class="card-image">
@@ -442,7 +394,7 @@
             <h2 class="card-title">STEP 3</h2>
             <div class="card-body">
               <div class="card-text">
-                <h3><strong>Review schedule</strong></h3>
+                <h3><strong>Review schedule.</strong></h3>
                 <p>Review the material at increasing intervals: 1 day, 3 days, 7 days, 14 days, 30 days, etc. Adjust intervals based on your performance.</p>
               </div>
               <div class="card-image">
@@ -459,7 +411,7 @@
             <h2 class="card-title">STEP 4</h2>
             <div class="card-body">
               <div class="card-text">
-                <h3><strong>Track progress</strong></h3>
+                <h3><strong>Track progress.</strong></h3>
                 <p>Keep track of which items you find difficult and which you've mastered. Focus more on the challenging items.</p>
               </div>
               <div class="card-image">
@@ -472,13 +424,30 @@
             </div>
           </div>
 
-          <div id="sr-card8" class="flashcard">
+          <div id="sr-card8" class="flashcard card-step">
+            <h2 class="card-title">STEP 5</h2>
+            <div class="card-body">
+              <div class="card-text">
+                <h3><strong>Update and grow your deck</strong></h3>
+                <p>As you cover new topics, keep adding them into your deck. Spaced Repetition becomes more powerful the longer you use it.</p>
+              </div>
+              <div class="card-image">
+                <img src="Images/pic8.jpg" alt="Track progress" />
+              </div>
+            </div>
+            <div class="card-arrows">
+              <button type="button" class="arrow-button" data-target="#sr-card7">◀</button>
+              <button type="button" class="arrow-button" data-target="#sr-card9">▶</button>
+            </div>
+          </div>
+
+          <div id="sr-card9" class="flashcard">
             <div class="card-center">
               <p>Congratulations, you have mastered <strong>Spaced Repetition!</strong></p>
               <p>(Click other study techniques below or click home to return home)</p>
             </div>
             <div class="arrows">
-              <button type="button" class="arrow-button" data-target="#sr-card7">◀</button>
+              <button type="button" class="arrow-button" data-target="#sr-card8">◀</button>
               <button type="button" class="arrow-button" data-target="#sr-card1">▶</button>
             </div>
           </div>
@@ -524,7 +493,7 @@
             <h2 class="card-title">STEP 1</h2>
             <div class="card-body">
               <div class="card-text">
-                <h3><strong>Choose a concept</strong></h3>
+                <h3><strong>Choose a concept.</strong></h3>
                 <p>Select a concept you want to learn and write it down at the top of a blank page.</p>
               </div>
               <div class="card-image">
@@ -541,7 +510,7 @@
             <h2 class="card-title">STEP 2</h2>
             <div class="card-body">
               <div class="card-text">
-                <h3><strong>Explain it simply</strong></h3>
+                <h3><strong>Explain it simply.</strong></h3>
                 <p>Write an explanation of the concept as if you were teaching it to someone who has no background in the subject.</p>
               </div>
               <div class="card-image">
@@ -558,7 +527,7 @@
             <h2 class="card-title">STEP 3</h2>
             <div class="card-body">
               <div class="card-text">
-                <h3><strong>Identify gaps</strong></h3>
+                <h3><strong>Identify gaps.</strong></h3>
                 <p>Review your explanation and identify any areas where you struggled to explain clearly or had to use complex language.</p>
               </div>
               <div class="card-image">
@@ -575,7 +544,7 @@
             <h2 class="card-title">STEP 4</h2>
             <div class="card-body">
               <div class="card-text">
-                <h3><strong>Simplify and review</strong></h3>
+                <h3><strong>Simplify and review.</strong></h3>
                 <p>Go back to the source material to fill in your knowledge gaps. Simplify your explanation further and review until you can explain it clearly.</p>
               </div>
               <div class="card-image">
@@ -588,13 +557,30 @@
             </div>
           </div>
 
-          <div id="fey-card8" class="flashcard">
+          <div id="fey-card8" class="flashcard card-step">
+            <h2 class="card-title">STEP 5</h2>
+            <div class="card-body">
+              <div class="card-text">
+                <h3><strong>Review and repeat</strong></h3>
+                <p>Practice teaching it out loud. If possible, explain it to a friend or classmate and invite questions. If they understand and can repeat it back, you've nailed it. If not, revise and repeat the process.</p>
+              </div>
+              <div class="card-image">
+                <img src="Images/pic6.jpg" alt="Simplify and review" />
+              </div>
+            </div>
+            <div class="card-arrows">
+              <button type="button" class="arrow-button" data-target="#fey-card7">◀</button>
+              <button type="button" class="arrow-button" data-target="#fey-card9">▶</button>
+            </div>
+          </div>
+
+          <div id="fey-card9" class="flashcard">
             <div class="card-center">
               <p>Congratulations, you have mastered the <strong>Feynman Technique!</strong></p>
               <p>(Click other study techniques below or click home to return home)</p>
             </div>
             <div class="arrows">
-              <button type="button" class="arrow-button" data-target="#fey-card7">◀</button>
+              <button type="button" class="arrow-button" data-target="#fey-card8">◀</button>
               <button type="button" class="arrow-button" data-target="#fey-card1">▶</button>
             </div>
           </div>
@@ -640,7 +626,7 @@
             <h2 class="card-title">STEP 1</h2>
             <div class="card-body">
               <div class="card-text">
-                <h3><strong>Identify related topics</strong></h3>
+                <h3><strong>Identify related topics.</strong></h3>
                 <p>Group related topics or skills that you want to practice together.</p>
               </div>
               <div class="card-image">
@@ -657,7 +643,7 @@
             <h2 class="card-title">STEP 2</h2>
             <div class="card-body">
               <div class="card-text">
-                <h3><strong>Create mixed practice sets</strong></h3>
+                <h3><strong>Create mixed practice sets.</strong></h3>
                 <p>Create practice sets that mix different types of problems or topics randomly.</p>
               </div>
               <div class="card-image">
@@ -674,11 +660,11 @@
             <h2 class="card-title">STEP 3</h2>
             <div class="card-body">
               <div class="card-text">
-                <h3><strong>Practice with variety</strong></h3>
-                <p>Work through the mixed problems, switching between different types of questions or topics.</p>
-              </div>
+                <h3><strong>Identify the method before solving</strong></h3>
+                <p>Before answering, ask: "What kind of problem is this? What method should I use?" This trains your brain to recognize problem types and strengthens decision-making.</p>
+            </div>
               <div class="card-image">
-                <img src="Images/pic1.jpg" alt="Practice with variety" />
+                <img src="Images/pic12.jpg" alt="Practice with variety" />
               </div>
             </div>
             <div class="card-arrows">
@@ -691,11 +677,11 @@
             <h2 class="card-title">STEP 4</h2>
             <div class="card-body">
               <div class="card-text">
-                <h3><strong>Review and adjust</strong></h3>
-                <p>Review your performance and adjust the difficulty and mix of problems based on your progress.</p>
+                <h3><strong>Review what you got wrong</strong></h3>
+                <p>After solving a set, go over your answers and pinpoint any confusion. Did you misapply a method because topics were too similar? That's good—it means the technique is working.</p>
               </div>
               <div class="card-image">
-                <img src="Images/pic4.jpg" alt="Review and adjust" />
+                <img src="Images/pic10.jpg" alt="Review and adjust" />
               </div>
             </div>
             <div class="card-arrows">
@@ -704,49 +690,96 @@
             </div>
           </div>
 
-          <div id="int-card8" class="flashcard">
+          <div id="int-card8" class="flashcard card-step">
+            <h2 class="card-title">STEP 5</h2>
+            <div class="card-body">
+              <div class="card-text">
+                <h3><strong>Reflect and adjust</strong></h3>
+                <p>After each session, write down what you learned. Interleaving is challenging at first, but over time, it greatly improves your ability to switch between topics smoothly.</p>
+            </div>
+              <div class="card-image">
+                <img src="Images/pic11.jpg" alt="Review and adjust" />
+              </div>
+            </div>
+            <div class="card-arrows">
+              <button type="button" class="arrow-button" data-target="#int-card7">◀</button>
+              <button type="button" class="arrow-button" data-target="#int-card9">▶</button>
+            </div>
+          </div>
+
+          <div id="int-card9" class="flashcard">
             <div class="card-center">
               <p>Congratulations, you have mastered <strong>Interleaved Practice!</strong></p>
               <p>(Click other study techniques below or click home to return home)</p>
             </div>
             <div class="arrows">
-              <button type="button" class="arrow-button" data-target="#int-card7">◀</button>
+              <button type="button" class="arrow-button" data-target="#int-card8">◀</button>
               <button type="button" class="arrow-button" data-target="#int-card1">▶</button>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- Footer -->
-  <div class="footer">
-    <button class="footer-button" onclick="navigateTo('AboutUS/abts.html')">About Us</button>
-  </div>
-
-  <div class="profile-overlay" id="profileOverlay"></div>
-  <div class="profile-slide-menu" id="profileSlideMenu">
-    <button class="close-profile-menu">&times;</button>
-    <div class="profile-menu-content">
-      <button class="nav-button" onclick="navigateTo('account.html')">My Account</button>
-      <button class="nav-button" onclick="logout()">Logout</button>
+      <!-- Bottom Technique Selection Buttons -->
+      <div id="bottom-technique-buttons" class="bottom-technique-buttons">
+        <button class="technique-button" data-technique="active-recall">ACTIVE RECALL</button>
+        <button class="technique-button" data-technique="pomodoro">POMODORO</button>
+        <button class="technique-button" data-technique="spaced-repetition">SPACED REPETITION</button>
+        <button class="technique-button" data-technique="feynman">FEYNMAN</button>
+        <button class="technique-button" data-technique="interleaved">INTERLEAVED PRACTICE</button>
+      </div>
     </div>
+
+    <!-- Footer (now part of main content) -->
+    <div class="footer">
+      <button class="footer-button" id="about-us-footer-button" onclick="navigateTo('AboutUS/abts.html')">About Us</button>
+    </div>
+
   </div>
 
   <script src="Scripts/techniques.js"></script>
   <script src="Scripts/spotify.js"></script>
-  <script src="Scripts/profile.js"></script>
-  <script>
+  <script type="module">
+    // Firebase configuration (copy from auth.js or a shared config file)
+    const firebaseConfig = {
+      apiKey: "AIzaSyBGsZGAaHR35zDa5KbdwPx8I0iMLppBv6A", // REPLACE WITH YOUR ACTUAL API KEY
+      authDomain: "studio-3645c.firebaseapp.com",
+      projectId: "studio-3645c",
+      storageBucket: "studio-3645c.appspot.com",
+      messagingSenderId: "1089413503582",
+      appId: "1:1089413503582:web:25338beefba4efbfb3b2cf",
+      measurementId: "G-0MKBZ0WYM6"
+    };
+
+    // Import Firebase app initialization
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-app.js";
+    // Import Firebase auth
+    import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-auth.js";
+    // Import Firebase app initialization if needed (ensure app is initialized somewhere)
+    // import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-app.js";
+
+    // Get the auth instance. Ensure Firebase app is initialized before this.
+    // Initialize Firebase app first
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app); // Then get the auth instance
+
     document.addEventListener("DOMContentLoaded", async () => {
       try {
-        // Initially hide all technique sections
-        document.querySelectorAll('#technique-display-area .technique-content').forEach(content => {
-          content.classList.remove('active');
-          content.querySelectorAll('.flashcard').forEach(card => card.classList.remove('active-card'));
-        });
+        const initialContent = document.querySelector('.main-content > .container');
+        const techniqueDisplayArea = document.getElementById('technique-display-area');
+        const bottomButtons = document.getElementById('bottom-technique-buttons');
+        const aboutUsFooterButton = document.getElementById('about-us-footer-button');
+        const homeNavButton = document.querySelector('.nav-links button[onclick*="homepage.html"]');
+
+        // Initially hide technique display area and bottom buttons
+        techniqueDisplayArea.style.display = 'none';
+        bottomButtons.style.display = 'none';
+        // Ensure initial content and about us button are visible on load
+        initialContent.style.display = 'flex';
+        aboutUsFooterButton.style.display = 'block';
 
         // Delegate click handling for arrows and technique buttons
-        document.addEventListener('click', event => {
+        document.addEventListener('click', async event => {
           if (event.target.classList.contains('arrow-button')) {
             const targetCardId = event.target.getAttribute('data-target');
             if (targetCardId) {
@@ -756,18 +789,126 @@
           } else if (event.target.classList.contains('technique-button')) {
             const techniqueId = event.target.getAttribute('data-technique');
             if (techniqueId) {
-              console.log('Technique button clicked, technique:', techniqueId);
+              console.log('Technique button clicked. ID:', techniqueId);
               toggleTechnique(techniqueId);
+
+              // Hide initial content and about us footer button, show technique area and bottom buttons
+              initialContent.style.display = 'none';
+              aboutUsFooterButton.style.display = 'none';
+              techniqueDisplayArea.style.display = 'block';
+              bottomButtons.style.display = 'flex';
+
+              // Update active state for bottom technique buttons
+              document.querySelectorAll('#bottom-technique-buttons .technique-button').forEach(button => {
+                button.classList.remove('active');
+              });
+              const activeBottomButton = document.querySelector(`#bottom-technique-buttons .technique-button[data-technique="${techniqueId}"]`);
+              if (activeBottomButton) {
+                activeBottomButton.classList.add('active');
+              }
+
+              // Render the floating Spotify player
+              const floatingPlayer = document.getElementById('floating-spotify-player');
+              if (floatingPlayer) {
+                await renderMusicUI(floatingPlayer);
+              }
             }
           }
         });
 
-        await renderMusicUI();
+        // Handle Home button click
+        if (homeNavButton) {
+          homeNavButton.addEventListener('click', () => {
+            // Show initial content and about us footer button, hide technique area and bottom buttons
+            initialContent.style.display = 'flex';
+            aboutUsFooterButton.style.display = 'block';
+            techniqueDisplayArea.style.display = 'none';
+            bottomButtons.style.display = 'none';
+          });
+        }
       } catch (error) {
         console.error('Error during initialization:', error);
       }
     });
-  </script>
 
+    function navigateTo(page) {
+      window.location.href = page;
+    }
+
+    function logout() {
+      // Show a confirmation dialog
+      const confirmLogout = confirm('Are you sure you want to log out?');
+
+      if (confirmLogout) {
+        console.log('Logout confirmed.');
+        // Use Firebase signOut
+        signOut(auth).then(() => {
+          console.log('User signed out successfully.');
+          // Clear the stored email from localStorage
+          localStorage.removeItem('loggedInUserEmail');
+          // Redirect to the index page
+          window.location.replace('index.html');
+        }).catch((error) => {
+          // An error happened during logout
+          console.error('Logout Error:', error);
+          alert('Logout failed. Please try again.');
+        });
+      } else {
+        console.log('Logout cancelled.');
+      }
+    }
+
+    // Function to display user email (placeholder - replace with actual logic)
+    function displayUserEmail() {
+      const userEmailSpan = document.getElementById('user-email');
+      // *** INTEGRATE YOUR ACTUAL EMAIL FETCHING LOGIC HERE ***
+      // This typically involves:
+      // 1. Checking if the user is logged in (e.g., by looking for a token).
+      // 2. If logged in, fetching the user's email from your authentication system or backend.
+      // 3. Updating the textContent of the userEmailSpan with the fetched email.
+
+      // Retrieve email from localStorage
+      const loggedInUserEmail = localStorage.getItem('loggedInUserEmail');
+
+      if (userEmailSpan) {
+        if (loggedInUserEmail && loggedInUserEmail !== '') {
+          userEmailSpan.textContent = loggedInUserEmail;
+        } else {
+          userEmailSpan.textContent = 'Guest'; // Display 'Guest' if email is not in localStorage
+          // Optionally hide the logout button if no user is logged in
+          const logoutButton = document.getElementById('logout-button');
+          if (logoutButton) { logoutButton.style.display = 'none'; }
+        }
+      }
+    }
+
+    // Call displayUserEmail on page load
+    displayUserEmail();
+
+    // Add event listener for the logout button
+    const logoutButton = document.getElementById('logout-button');
+    if (logoutButton) {
+      logoutButton.addEventListener('click', logout);
+    }
+
+    // Auth state observer (optional, but good for real-time auth state changes)
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log('Auth state changed: User is signed in:', user.email);
+        // You could update UI based on auth state here if needed
+         // For example, ensure logout button is visible if user is signed in
+          const logoutButton = document.getElementById('logout-button');
+          if (logoutButton) { logoutButton.style.display = 'block'; }
+
+      } else {
+        console.log('Auth state changed: No user is signed in.');
+         // For example, ensure logout button is hidden if user is signed out
+          const logoutButton = document.getElementById('logout-button');
+          if (logoutButton) { logoutButton.style.display = 'none'; }
+
+      }
+    });
+
+  </script>
 </body>
 </html>

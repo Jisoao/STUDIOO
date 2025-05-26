@@ -210,7 +210,6 @@ body {
   opacity: 1;
 }
 
-/* Responsive Layout for Smaller Screens */
 @media (max-width: 600px) {
   body {
     padding: 1rem;

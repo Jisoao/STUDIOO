@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, sendEmailVerification } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-auth.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-analytics.js";
 
 // Firebase configuration
@@ -77,8 +77,13 @@ document.getElementById('registerForm').addEventListener('submit', function(even
 
   createUserWithEmailAndPassword(auth, email, password)
     .then(() => {
-      successEl.textContent = "Registration successful! Please log in.";
-      setTimeout(showLogin, 1200);
+      // Send email verification
+      return sendEmailVerification(auth.currentUser);
+    })
+    .then(() => {
+      successEl.textContent = "Registration successful! Please check your email to verify your account before logging in.";
+      // Optionally, clear the form or redirect after a longer delay
+      // setTimeout(showLogin, 5000); // Redirect after 5 seconds
     })
     .catch((error) => {
       errorEl.textContent = error.message;
@@ -97,13 +102,25 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
 
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      successEl.textContent = "Login successful! Redirecting...";
-      // Use a more reliable redirection method
-      setTimeout(() => {
-        window.location.replace('homepage.html');
-      }, 1000);
+      const user = userCredential.user;
+      if (user.emailVerified) {
+        console.log('Login successful: User email is verified.');
+        // Save the user's email to local storage before redirecting
+        localStorage.setItem('loggedInUserEmail', user.email);
+        console.log('User email saved to localStorage:', user.email);
+        successEl.textContent = "Login successful! Redirecting...";
+        setTimeout(() => {
+          window.location.replace('homepage.html');
+        }, 1000);
+      } else {
+        // If email is not verified, sign out the user and show error
+        console.log('Login failed: User email is not verified.');
+        auth.signOut(); // Sign out unverified user
+        errorEl.textContent = "Please verify your email address before logging in. Check your inbox for the verification link.";
+      }
     })
     .catch((error) => {
+      console.error('Firebase Login Error:', error.message);
       errorEl.textContent = error.message;
     });
 });
@@ -112,16 +129,25 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
 onAuthStateChanged(auth, (user) => {
   if (user) {
     console.log('User is signed in:', user.email);
-    // If we're on the auth page and user is signed in, redirect to homepage
-    if (window.location.pathname.includes('auth.html')) {
-      window.location.replace('homepage.html');
+    // If the user is signed in and email is verified
+    if (user.emailVerified) {
+      // If we're on the auth page and user is signed in AND verified, redirect to homepage
+      if (window.location.pathname.includes('auth.html')) {
+        console.log('User is verified, redirecting to homepage.');
+        window.location.replace('homepage.html');
+      }
+    } else {
+      // User is signed in but email not verified
+      console.log('User signed in but email not verified.');
+      // Keep them on the auth page or redirect to a verification prompt page
+      // For now, we'll keep them on the auth page and show an error if they try to log in
+      // You might want a dedicated page asking them to verify email.
     }
   } else {
     console.log('No user is signed in');
   }
 });
 
-// On page load, show the correct form based on the hash
 window.addEventListener('DOMContentLoaded', () => {
   if (window.location.hash === '#signup') {
     showRegister();

@@ -1,5 +1,4 @@
 .footer {
-  background: linear-gradient(to right, #000000, #1b1a1a, #000000);
   padding: 20px 0;
   text-align: center; 
   margin-top: 80px; 
@@ -16,7 +15,7 @@
   border-radius: 8px;
   transition: background-color 0.3s, color 0.3s;
   margin: 4px auto;
-  display: block; /* center it horizontally */
+  display: block; 
 }
 
 .footer-button:hover {

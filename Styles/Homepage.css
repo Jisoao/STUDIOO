@@ -18,7 +18,7 @@ body {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: stretch;
-  gap: 80px;
+  gap: 90px;
   width: 100%;
 }
 
@@ -26,21 +26,17 @@ body {
   flex: 3;
   min-width: 600px;
   display: flex;
+  margin-left: 2%;
+  margin-right: 2%;
   flex-direction: column;
   justify-content: center;
 }
 
-.quote {
-  font-size: 3.5rem;
-  font-weight: bold;
-  line-height: 1.2;
-  margin-bottom: 20px;
-}
-
 .descrp {
-  font-size: 1.3rem;
+  font-size: 2rem;
   line-height: 1.6;
   text-align: justify;
+  margin-top: 20px;
   margin-bottom: 0;
   overflow-wrap: break-word;
 }
@@ -48,47 +44,54 @@ body {
 .image-box {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-top: 30px;
   background: linear-gradient(to right, #000000, #2f2f2f, #000000);
   border-radius: 10px;
   overflow: hidden;
+  width: 100%;       
+  max-width: 900px; 
+  height: 300px;     
 }
+
 
 .image-box img {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
+  border-radius: 0;
 }
+
 
 .right-column {
   flex: 2;
-  min-width: 400px;
+  min-width: 450px;
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  font-size: 1.4rem;
-  font-weight: bold;
-  text-align: center;
-  padding: 80px;
+  gap: 15px;
+  font-size: 1.2rem;
+  margin: 20px auto;
+  padding: 10px;
   border-radius: 10px;
-  border: 2px solid white;
-  background: linear-gradient(to right, #000000, #2f2f2f, #000000);
+  border: 0.5px solid white;
+  align-items: center;
 }
 
 .right-column p {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .right-column button {
   background: none;
   color: white;
-  font-size: 1.1rem;
-  font-weight: bold;
-  padding: 14px 20px;
+  font-size: 1.2rem;
+  width: 400px;
+  padding: 18px 30px;
   border: 2px solid white;
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s ease;
+  margin-bottom: 15px;
 }
 
 .right-column button:hover {
@@ -106,9 +109,90 @@ body {
   .left-column, .right-column {
     flex: 1 1 100%;
     max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
   }
   
   .right-column {
     margin-top: 40px;
   }
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 20px; /* Adjust padding */
+    }
+
+    .container {
+        flex-direction: column; /* Stack columns vertically */
+        gap: 30px; /* Keep container gap as is */
+    }
+
+    .left-column,
+    .right-column {
+        padding: 0 15px; /* Adjust padding */
+        min-width: auto; /* Allow shrinking */
+    }
+
+    .descrp {
+        font-size: 1.5rem; /* Adjust font size */
+        margin-top: 40px; /* Adjust margin */
+        text-align: center; /* Center text */
+    }
+
+    .image-box {
+        height: 250px; /* Adjust image box height */
+    }
+
+    .right-column {
+        margin-top: 20px; /* Adjust margin */
+        margin-right: auto;
+        margin-left: auto;
+        align-items: center; /* Ensure items are centered in smaller screens too */
+        gap: 10px; /* Adjusted gap for this breakpoint */
+    }
+
+    .right-column p {
+        text-align: center; /* Center text */
+    }
+
+    .right-column button {
+        width: 90%; /* Adjust button width */
+        max-width: 300px; /* Add max-width */
+        padding: 12px 20px; /* Adjust padding */
+        font-size: 1rem; /* Adjust font size */
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 15px; /* Further adjust padding */
+    }
+
+    .container {
+        gap: 20px; /* Further adjust gap */
+    }
+
+    .left-column,
+    .right-column {
+        padding: 0 10px; /* Further adjust padding */
+        gap: 8px; /* Adjusted gap for this breakpoint */
+    }
+
+    .descrp {
+        font-size: 1.2rem; /* Further adjust font size */
+        margin-top: 30px; /* Further adjust margin */
+    }
+
+    .image-box {
+        height: 200px; /* Further adjust image box height */
+    }
+
+    .right-column button {
+        width: 100%; /* Full width button */
+        padding: 10px 15px; /* Adjust padding */
+        font-size: 0.9rem; /* Further adjust font size */
+    }
 }
