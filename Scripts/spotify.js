@@ -1,9 +1,6 @@
 // Spotify API Configuration
 const SPOTIFY_CLIENT_ID = '6efa8e49fdf64e0c9c6161b3951d1e77'; 
-const SPOTIFY_REDIRECT_URI = 
-  window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost'
-    ? 'http://127.0.0.1:5500/homepage.html'
-    : 'https://jisoao.github.io/STUDIOO/homepage.html';
+const SPOTIFY_REDIRECT_URI = 'http://127.0.0.1:5500/homepage.html'; 
 const SPOTIFY_SCOPES = [
   'user-read-private',
   'user-read-email',
@@ -65,14 +62,17 @@ async function handleAuthState() {
   
   if (accessToken) {
     if (isLoginPage) {
+      // If we're on login page and have valid token, redirect to homepage
       window.location.href = 'homepage.html';
     } else {
+      // If we have a valid token and are not on the login page, render the music UI
       const floatingPlayer = document.getElementById('floating-spotify-player');
       if (floatingPlayer) {
         await renderMusicUI(floatingPlayer);
       }
     }
   } else {
+    // Only redirect to login if we're on a page that requires Spotify
     const requiresSpotify = window.location.pathname.includes('spotify.html');
     
     if (requiresSpotify && !isLoginPage) {
@@ -84,10 +84,13 @@ async function handleAuthState() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+  // Check for access token in URL first
   checkForAccessToken();
   
+  // Then handle auth state
   const accessToken = await handleAuthState();
   
+  // If no token, render the login UI immediately
   if (!accessToken) {
     const floatingPlayer = document.getElementById('floating-spotify-player');
     if (floatingPlayer) {
@@ -99,7 +102,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 });
-
 async function initiateSpotifyLogin() {
   const authUrl = new URL('https://accounts.spotify.com/authorize');
   
@@ -175,17 +177,22 @@ async function exchangeCodeForTokens(code) {
       }
     } catch (profileError) {
       console.error('Failed to fetch Spotify user profile:', profileError);
+      // Continue even if fetching profile fails, but product type won't be available
     }
-    
+    // -------------------------------------------------
+
+    // Check for stored technique ID and navigate if found
     const lastTechniqueId = localStorage.getItem('lastTechniqueId');
     if (lastTechniqueId) {
-        localStorage.removeItem('lastTechniqueId'); 
+        localStorage.removeItem('lastTechniqueId'); // Clean up stored ID
+        // Find and trigger click on the corresponding technique button
         const techniqueButton = document.querySelector(`.technique-button[data-technique="${lastTechniqueId}"]`);
         if (techniqueButton) {
-            techniqueButton.click(); 
+            techniqueButton.click(); // Simulate click to show the technique
         }
     }
 
+    // Also render the music UI after successful token exchange
     const floatingPlayer = document.getElementById('floating-spotify-player');
     if (floatingPlayer) {
       await renderMusicUI(floatingPlayer);
@@ -193,18 +200,20 @@ async function exchangeCodeForTokens(code) {
 
   } catch (error) {
     console.error('Token exchange failed:', error);
+    // Handle error (e.g., show error message to user)
   }
 }
 
 function checkForAccessToken() {
   const hash = window.location.hash.substring(1);
   const hashParams = new URLSearchParams(hash);
-  const accessToken = hashParams.get('access_token'); 
+  const accessToken = hashParams.get('access_token'); // Still check for old token in hash for backward compatibility
 
   const urlParams = new URLSearchParams(window.location.search);
   const code = urlParams.get('code');
   const error = urlParams.get('error');
   
+  // Clear parameters from URL
   if (code || error || accessToken) {
       window.history.replaceState({}, document.title, window.location.pathname);
   }
@@ -212,8 +221,9 @@ function checkForAccessToken() {
   if (code) {
     console.log('Authorization code found in URL.', code);
     exchangeCodeForTokens(code);
-  } else if (accessToken) { 
+  } else if (accessToken) { // Handle old implicit grant flow if necessary
     console.log('Old access token found in hash.', accessToken);
+    // Process old token - store and update UI
     const expiresIn = hashParams.get('expires_in');
     localStorage.setItem('spotifyAccessToken', accessToken);
     const expiryTime = Date.now() + (parseInt(expiresIn) * 1000);
@@ -226,6 +236,7 @@ function checkForAccessToken() {
   }
 }
 
+// Helper function to make authenticated API calls
 async function fetchSpotifyData(endpoint, accessToken) {
   try {
     const response = await fetch(`https://api.spotify.com/v1${endpoint}`, {
@@ -275,8 +286,10 @@ async function renderMusicUI(container) {
         </div>
       `;
       
+      // Add collapsed class initially
       container.classList.add('collapsed');
       
+      // Add click handler to toggle expanded/collapsed state
       container.addEventListener('click', (e) => {
         if (container.classList.contains('collapsed')) {
           container.classList.remove('collapsed');
@@ -328,9 +341,11 @@ async function searchSpotify() {
   resultsArea.innerHTML = '<p>Searching...</p>';
 
   try {
+    // Search for tracks and playlists
     const data = await fetchSpotifyData(`/search?q=${encodeURIComponent(query)}&type=track,playlist&limit=10`, accessToken);
     console.log('Spotify search results:', data);
 
+    // Check if tracks or playlists data and items exist and have items
     const hasTracks = data.tracks && data.tracks.items && data.tracks.items.length > 0;
     const hasPlaylists = data.playlists && data.playlists.items && data.playlists.items.length > 0;
 
@@ -341,6 +356,7 @@ async function searchSpotify() {
 
     let resultsHtml = '<ul style="list-style: none; padding: 0;">';
 
+    // Add track results
     if (hasTracks) {
         resultsHtml += '<li><strong>Tracks:</strong></li>';
         data.tracks.items.forEach(track => {
@@ -350,6 +366,7 @@ async function searchSpotify() {
         });
     }
 
+    // Add playlist results
     if (hasPlaylists) {
         resultsHtml += '<li><strong>Playlists:</strong></li>';
         data.playlists.items.forEach(playlist => {
@@ -373,11 +390,13 @@ async function searchSpotify() {
   }
 }
 
+// Function to play a Spotify item using its URI (will be implemented next)
 function playSpotifyItem(uri) {
     console.log('Attempting to play Spotify item:', uri);
     const resultsArea = document.getElementById('spotify-results-area');
     if (!resultsArea) return;
 
+    // Clear previous content and embed the Spotify player
     resultsArea.innerHTML = `
         <iframe src="https://open.spotify.com/embed/${uri.split(':')[1]}/${uri.split(':')[2]}?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     `;
