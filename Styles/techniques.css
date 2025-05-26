@@ -44,7 +44,7 @@ body {
 .cards {
   width: 100%;
   max-width: 980px;
-  margin: 0 auto; /* Center the cards */
+  margin: 0 auto; 
   position: relative;
 }
 
@@ -76,7 +76,7 @@ body {
   justify-content: flex-start;
   overflow-y: auto;
   overflow-x: hidden;
-  margin: -30px auto 10px;
+  margin: 20px auto 10px;
   box-sizing: border-box;
   position: relative;
   animation: flashcardFlip 0.4s;
@@ -410,15 +410,14 @@ body {
 }
 
 #bottom-technique-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    padding: 20px;
-    width: 100%;
-    box-sizing: border-box;
-    flex-wrap: wrap;
-    margin: 20px;
-    margin-left: 2%;
+  display: none; 
+  justify-content: center;
+  gap: 15px;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  margin: 20px;
 }
 
 #bottom-technique-buttons .technique-button {
@@ -624,27 +623,27 @@ body {
 }
 
 #spotify-widget-area {
-    background-color: #181818;
-    color: white;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    overflow-y: auto;
-    margin-left: 20px;
-    flex-shrink: 0;
+  display: none; 
+  background-color: #181818;
+  color: white;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  margin-left: 20px;
+  flex-shrink: 0;
 }
 
 .technique-content.active {
-  display: block;
+  display: block; 
   flex: 1 1 0%;
   font-size: 1rem;
   min-width: 300px;
 }
 
-/* Floating Spotify Player */
 .spotify-widget-area {
   position: fixed;
   bottom: 20px;
@@ -694,29 +693,61 @@ body {
 
 .lesson-buttons {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   padding: 20px;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 30px auto;
+  justify-content: center;
 }
 
 .lesson-button {
   background: var(--card);
-  border: 1.5px solid #157575;
+  border: 1.5px solid #ffffff;
   border-radius: 15px;
   padding: 20px;
   text-align: center;
   text-decoration: none;
-  color: var(--primary);
+  color: inherit;
   transition: all 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.5s ease forwards;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.lesson-button i {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.lesson-button h3 {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+  color: inherit;
+}
+
+.lesson-button p {
+  font-size: 1rem;
+  color: inherit;
+}
+
+.lesson-button:hover {
+  background: #ffffff;
+  color: #000000;
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
 }
 
 .lesson-button:nth-child(1) { animation-delay: 0.1s; }
 .lesson-button:nth-child(2) { animation-delay: 0.2s; }
 .lesson-button:nth-child(3) { animation-delay: 0.3s; }
 .lesson-button:nth-child(4) { animation-delay: 0.4s; }
+
+#lesson-selection {
+  display: block;
+  padding: 20px;
+  margin-top: 20px;
+  text-align: center;
+}

@@ -82,8 +82,6 @@ document.getElementById('registerForm').addEventListener('submit', function(even
     })
     .then(() => {
       successEl.textContent = "Registration successful! Please check your email to verify your account before logging in.";
-      // Optionally, clear the form or redirect after a longer delay
-      // setTimeout(showLogin, 5000); // Redirect after 5 seconds
     })
     .catch((error) => {
       errorEl.textContent = error.message;
@@ -131,17 +129,12 @@ onAuthStateChanged(auth, (user) => {
     console.log('User is signed in:', user.email);
     // If the user is signed in and email is verified
     if (user.emailVerified) {
-      // If we're on the auth page and user is signed in AND verified, redirect to homepage
       if (window.location.pathname.includes('auth.html')) {
         console.log('User is verified, redirecting to homepage.');
         window.location.replace('homepage.html');
       }
     } else {
-      // User is signed in but email not verified
       console.log('User signed in but email not verified.');
-      // Keep them on the auth page or redirect to a verification prompt page
-      // For now, we'll keep them on the auth page and show an error if they try to log in
-      // You might want a dedicated page asking them to verify email.
     }
   } else {
     console.log('No user is signed in');

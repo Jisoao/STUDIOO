@@ -1,15 +1,12 @@
-// Scripts/spotify.js - Updated with proper Spotify OAuth implementation and PKCE Flow
-
 // Spotify API Configuration
-const SPOTIFY_CLIENT_ID = '6efa8e49fdf64e0c9c6161b3951d1e77'; // Replace with your Spotify app client ID
-const SPOTIFY_REDIRECT_URI = 'http://127.0.0.1:5500/homepage.html'; // Must match your Spotify app settings
+const SPOTIFY_CLIENT_ID = '6efa8e49fdf64e0c9c6161b3951d1e77'; 
+const SPOTIFY_REDIRECT_URI = 'http://127.0.0.1:5500/homepage.html'; 
 const SPOTIFY_SCOPES = [
   'user-read-private',
   'user-read-email',
   'user-library-read'
 ].join(' ');
 
-// PKCE helper functions
 function generateRandomString(length) {
     let text = '';
     const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -67,6 +64,12 @@ async function handleAuthState() {
     if (isLoginPage) {
       // If we're on login page and have valid token, redirect to homepage
       window.location.href = 'homepage.html';
+    } else {
+      // If we have a valid token and are not on the login page, render the music UI
+      const floatingPlayer = document.getElementById('floating-spotify-player');
+      if (floatingPlayer) {
+        await renderMusicUI(floatingPlayer);
+      }
     }
   } else {
     // Only redirect to login if we're on a page that requires Spotify
@@ -125,7 +128,6 @@ async function initiateSpotifyLogin() {
   window.location.href = authUrl.toString();
 }
 
-// Add a new function to exchange the authorization code for tokens
 async function exchangeCodeForTokens(code) {
   const codeVerifier = localStorage.getItem('spotify_code_verifier');
 
@@ -187,13 +189,13 @@ async function exchangeCodeForTokens(code) {
         const techniqueButton = document.querySelector(`.technique-button[data-technique="${lastTechniqueId}"]`);
         if (techniqueButton) {
             techniqueButton.click(); // Simulate click to show the technique
-        } else {
-            console.warn('Could not find technique button for stored ID:', lastTechniqueId);
-            // Optionally navigate to homepage or show a default view
         }
-    } else {
-        // If no stored technique, you might want to show a default view or the initial homepage state
-        // For now, we'll assume being on homepage.html is fine, renderMusicUI will update the Spotify UI
+    }
+
+    // Also render the music UI after successful token exchange
+    const floatingPlayer = document.getElementById('floating-spotify-player');
+    if (floatingPlayer) {
+      await renderMusicUI(floatingPlayer);
     }
 
   } catch (error) {
@@ -258,6 +260,10 @@ async function fetchSpotifyData(endpoint, accessToken) {
 window.validateToken = validateToken;
 window.fetchSpotifyData = fetchSpotifyData;
 window.handleAuthState = handleAuthState;
+window.renderMusicUI = renderMusicUI;
+window.initiateSpotifyLogin = initiateSpotifyLogin;
+window.searchSpotify = searchSpotify;
+window.playSpotifyItem = playSpotifyItem;
 
 async function renderMusicUI(container) {
   console.log('renderMusicUI called.', { container: !!container });

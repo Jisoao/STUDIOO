@@ -16,26 +16,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// Navigation elements
-const navContainer = document.querySelector('.nav-container');
-const hamburgerBtn = document.querySelector('.hamburger-btn');
-const menuDropdown = document.querySelector('.menu-dropdown');
+// Navigation elements (excluding old menu elements)
 const loginBtn = document.querySelector('.login-btn');
-const logoutBtn = document.getElementById('logoutBtn');
-
-// Toggle menu
-function toggleMenu() {
-  hamburgerBtn.classList.toggle('active');
-  menuDropdown.classList.toggle('show');
-}
-
-// Close menu when clicking outside
-document.addEventListener('click', (event) => {
-  if (!navContainer.contains(event.target)) {
-    hamburgerBtn.classList.remove('active');
-    menuDropdown.classList.remove('show');
-  }
-});
+const logoutBtn = document.getElementById('logout-button'); // Corrected ID based on HTML
 
 // Handle logout
 if (logoutBtn) {
@@ -52,88 +35,59 @@ if (logoutBtn) {
   });
 }
 
-// Handle auth state changes
 onAuthStateChanged(auth, (user) => {
   if (user) {
     // User is signed in
     if (loginBtn) {
       loginBtn.style.display = 'none';
     }
-    if (hamburgerBtn) {
-      hamburgerBtn.style.display = 'flex';
-    }
   } else {
     // User is signed out
     if (loginBtn) {
       loginBtn.style.display = 'block';
     }
-    if (hamburgerBtn) {
-      hamburgerBtn.style.display = 'none';
-    }
-    menuDropdown.classList.remove('show');
-    hamburgerBtn.classList.remove('active');
   }
 });
 
-// Add event listeners
-if (hamburgerBtn) {
-  hamburgerBtn.addEventListener('click', (event) => {
-    event.stopPropagation();
-    toggleMenu();
-  });
+
+function navigateTo(url) {
+  window.location.href = url;
 }
 
-// Handle menu item clicks
-document.querySelectorAll('.menu-item').forEach(item => {
-  if (item.id !== 'logoutBtn') {
-    item.addEventListener('click', () => {
-      toggleMenu();
-    });
+// Function to display user email (kept for use in HTML and auth state observer)
+function displayUserEmail() {
+  const userEmailSpan = document.getElementById('user-email');
+  const loggedInUserEmail = localStorage.getItem('loggedInUserEmail');
+
+  if (userEmailSpan) {
+    if (loggedInUserEmail && loggedInUserEmail !== '') {
+      userEmailSpan.textContent = loggedInUserEmail;
+    } else {
+      userEmailSpan.textContent = ''; 
+    }
+  }
+}
+
+onAuthStateChanged(auth, (user) => {
+  const logoutButton = document.getElementById('logout-button');
+  const userEmailSpan = document.getElementById('user-email');
+
+  if (user) {
+    console.log('Auth state changed: User is signed in:', user.email);
+    if (logoutButton) { logoutButton.style.display = 'block'; } // Show logout button
+    if (userEmailSpan) { displayUserEmail(); } // Update email display
+  } else {
+    console.log('Auth state changed: No user is signed in.');
+    if (logoutButton) { logoutButton.style.display = 'none'; } // Hide logout button
+    if (userEmailSpan) { userEmailSpan.textContent = ''; } // Clear email display
   }
 });
 
-// --- Centralized Slide Menu Logic ---
-function openProfileMenu() {
-  const menu = document.getElementById('profileSlideMenu');
-  const overlay = document.getElementById('profileOverlay');
-  if (menu && overlay) {
-    menu.classList.add('open');
-    overlay.classList.add('open');
-  }
-}
+// Initial display email on page load
+document.addEventListener('DOMContentLoaded', () => {
+  displayUserEmail();
+});
 
-function closeProfileMenu() {
-  const menu = document.getElementById('profileSlideMenu');
-  const overlay = document.getElementById('profileOverlay');
-  if (menu && overlay) {
-    menu.classList.remove('open');
-    overlay.classList.remove('open');
-  }
-}
-
-function setupProfileMenuEvents() {
-  const profileIcon = document.querySelector('.profile-icon-img');
-  const overlay = document.getElementById('profileOverlay');
-  const closeBtn = document.querySelector('.close-profile-menu');
-  if (profileIcon) {
-    profileIcon.onclick = openProfileMenu;
-  }
-  if (overlay) {
-    overlay.onclick = closeProfileMenu;
-  }
-  if (closeBtn) {
-    closeBtn.onclick = closeProfileMenu;
-  }
-  document.addEventListener('click', function(e) {
-    const menu = document.getElementById('profileSlideMenu');
-    const icon = document.querySelector('.profile-icon-img');
-    if (menu && menu.classList.contains('open') && !menu.contains(e.target) && e.target !== icon) {
-      closeProfileMenu();
-    }
-  });
-}
-
-// Only run on non-auth, non-index pages
-if (!window.location.pathname.endsWith('index.html') && !window.location.pathname.includes('auth')) {
-  window.addEventListener('DOMContentLoaded', setupProfileMenuEvents);
-} 
+window.navigateTo = navigateTo;
+window.logout = logout;
+window.displayUserEmail = displayUserEmail;

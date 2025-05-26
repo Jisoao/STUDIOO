@@ -3,37 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>STUDio | Techniques</title>
+  <title>STUDio</title>
   <link rel="stylesheet" href="Styles/techniques.css">
+  <link rel="stylesheet" href="Styles/Header.css">
+  <link rel="stylesheet" href="Styles/Footer.css">
 </head>
 <body>
-  
-<div id="lesson-selection">
-  <header class="page-header">
-      <h1>Choose a Lesson</h1>
-      <p>Select a topic to start learning</p>
-  </header>
-  <div class="lesson-buttons">
-      <a href="#" class="lesson-button" data-lesson="cramers-rule">
-          <i class="fas fa-square-root-alt"></i>
-          <h3>Cramer's Rule</h3>
-          <p>Learn how to solve systems using determinants</p>
-      </a>
-      <a href="#" class="lesson-button" data-lesson="gauss-elimination">
-          <i class="fas fa-arrows-alt-v"></i>
-          <h3>Gauss Elimination</h3>
-          <p>Master the method of elimination</p>
-      </a>
-      <a href="#" class="lesson-button" data-lesson="gauss-jordan">
-          <i class="fas fa-equals"></i>
-          <h3>Gauss Jordan</h3>
-          <p>Learn reduced row echelon form</p>
-      </a>
-      <a href="#" class="lesson-button" data-lesson="lu-decomposition">
-          <i class="fas fa-layer-group"></i>
-          <h3>LU Decomposition</h3>
-          <p>Understand matrix factorization</p>
-      </a>
+
+  <!-- Navigation Header -->
+  <div class="header">
+    <div class="nav-links">
+      <button class="nav-button" id="logo" onclick="navigateTo('index.html')">STUDio</button>
+      <button class="nav-button" onclick="navigateTo('homepage.html')">Home</button>
+      <button class="nav-button" onclick="navigateTo('techniques.html')">Techniques</button>
+      <button class="nav-button" id="about-us-nav-button" onclick="navigateTo('AboutUS/abts.html')">About</button>
+    </div>
+    <!-- User Info and Logout -->
+    <div class="user-auth-controls">
+      <span id="user-email" class="user-email-text"></span>
+      <button class="nav-button" id="logout-button">Logout</button>
+    </div>
   </div>
+
+  <div id="lesson-selection">
+    <header class="page-header">
+      <h1>Choose a Study Technique</h1>
+      <p>Select a technique to start learning</p>
+    </header>
+    <div class="lesson-buttons">
+      <a href="homepage.html?technique=active-recall" class="lesson-button" data-lesson="active-recall">
+        <i class="fas fa-brain"></i>
+        <h3>Active Recall</h3>
+        <p>Test yourself to strengthen memory</p>
+      </a>
+      <a href="homepage.html?technique=pomodoro" class="lesson-button" data-lesson="pomodoro">
+        <i class="fas fa-clock"></i>
+        <h3>Pomodoro</h3>
+        <p>Work in focused intervals</p>
+      </a>
+      <a href="homepage.html?technique=feynman" class="lesson-button" data-lesson="feynman">
+        <i class="fas fa-comment"></i>
+        <h3>Feynman</h3>
+        <p>Explain concepts simply</p>
+      </a>
+      <a href="homepage.html?technique=interleaved" class="lesson-button" data-lesson="interleaved">
+        <i class="fas fa-random"></i>
+        <h3>Interleaved</h3>
+        <p>Mix different topics</p>
+      </a>
+      <a href="homepage.html?technique=space-repetition" class="lesson-button" data-lesson="space-repetition">
+        <i class="fas fa-calendar-alt"></i>
+        <h3>Space Repetition</h3>
+        <p>Review at increasing intervals</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <button class="footer-button" onclick="navigateTo('AboutUS/abts.html')">About Us</button>
+  </div>
+
+  <script src="Scripts/techniques.js"></script>
+  <script src="Scripts/spotify.js"></script>
+  <script src="Scripts/nav.js" type="module"></script>
+
 </body>
 </html>

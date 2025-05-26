@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Study Techniques</title>
+  <title>STUDio</title>
   <link rel="stylesheet" href="Styles/Header.css" />
   <link rel="stylesheet" href="Styles/Homepage.css" />
   <link rel="stylesheet" href="Styles/Footer.css" />
@@ -48,11 +48,9 @@
       </div>
     </div>
 
-    <!-- Area to display selected technique content -->
     <div id="technique-display-area" class="technique-display-area">
       <!-- Single floating Spotify player container -->
       <div id="floating-spotify-player" class="spotify-widget-area">
-        <!-- Spotify UI will be rendered here by JavaScript -->
       </div>
 
       <div id="active-recall" class="technique-content">
@@ -730,185 +728,16 @@
       </div>
     </div>
 
-    <!-- Footer (now part of main content) -->
+    <!-- Footer -->
     <div class="footer">
-      <button class="footer-button" id="about-us-footer-button" onclick="navigateTo('AboutUS/abts.html')">About Us</button>
+      <button class="footer-button" id="about-us-footer-button" onclick="window.location.href='AboutUS/abts.html'">About Us</button>
     </div>
 
   </div>
 
-  <script src="Scripts/techniques.js"></script>
-  <script src="Scripts/spotify.js"></script>
-  <script type="module">
-    // Firebase configuration (copy from auth.js or a shared config file)
-    const firebaseConfig = {
-      apiKey: "AIzaSyBGsZGAaHR35zDa5KbdwPx8I0iMLppBv6A", // REPLACE WITH YOUR ACTUAL API KEY
-      authDomain: "studio-3645c.firebaseapp.com",
-      projectId: "studio-3645c",
-      storageBucket: "studio-3645c.appspot.com",
-      messagingSenderId: "1089413503582",
-      appId: "1:1089413503582:web:25338beefba4efbfb3b2cf",
-      measurementId: "G-0MKBZ0WYM6"
-    };
+  <script src="Scripts/techniques.js" ></script>
+  <script src="Scripts/spotify.js" type="module"></script>
+  <script src="Scripts/nav.js" type="module"></script>
 
-    // Import Firebase app initialization
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-app.js";
-    // Import Firebase auth
-    import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-auth.js";
-    // Import Firebase app initialization if needed (ensure app is initialized somewhere)
-    // import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-app.js";
-
-    // Get the auth instance. Ensure Firebase app is initialized before this.
-    // Initialize Firebase app first
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app); // Then get the auth instance
-
-    document.addEventListener("DOMContentLoaded", async () => {
-      try {
-        const initialContent = document.querySelector('.main-content > .container');
-        const techniqueDisplayArea = document.getElementById('technique-display-area');
-        const bottomButtons = document.getElementById('bottom-technique-buttons');
-        const aboutUsFooterButton = document.getElementById('about-us-footer-button');
-        const homeNavButton = document.querySelector('.nav-links button[onclick*="homepage.html"]');
-
-        // Initially hide technique display area and bottom buttons
-        techniqueDisplayArea.style.display = 'none';
-        bottomButtons.style.display = 'none';
-        // Ensure initial content and about us button are visible on load
-        initialContent.style.display = 'flex';
-        aboutUsFooterButton.style.display = 'block';
-
-        // Delegate click handling for arrows and technique buttons
-        document.addEventListener('click', async event => {
-          if (event.target.classList.contains('arrow-button')) {
-            const targetCardId = event.target.getAttribute('data-target');
-            if (targetCardId) {
-              console.log('Arrow button clicked, target:', targetCardId);
-              showCardById(targetCardId);
-            }
-          } else if (event.target.classList.contains('technique-button')) {
-            const techniqueId = event.target.getAttribute('data-technique');
-            if (techniqueId) {
-              console.log('Technique button clicked. ID:', techniqueId);
-              toggleTechnique(techniqueId);
-
-              // Hide initial content and about us footer button, show technique area and bottom buttons
-              initialContent.style.display = 'none';
-              aboutUsFooterButton.style.display = 'none';
-              techniqueDisplayArea.style.display = 'block';
-              bottomButtons.style.display = 'flex';
-
-              // Update active state for bottom technique buttons
-              document.querySelectorAll('#bottom-technique-buttons .technique-button').forEach(button => {
-                button.classList.remove('active');
-              });
-              const activeBottomButton = document.querySelector(`#bottom-technique-buttons .technique-button[data-technique="${techniqueId}"]`);
-              if (activeBottomButton) {
-                activeBottomButton.classList.add('active');
-              }
-
-              // Render the floating Spotify player
-              const floatingPlayer = document.getElementById('floating-spotify-player');
-              if (floatingPlayer) {
-                await renderMusicUI(floatingPlayer);
-              }
-            }
-          }
-        });
-
-        // Handle Home button click
-        if (homeNavButton) {
-          homeNavButton.addEventListener('click', () => {
-            // Show initial content and about us footer button, hide technique area and bottom buttons
-            initialContent.style.display = 'flex';
-            aboutUsFooterButton.style.display = 'block';
-            techniqueDisplayArea.style.display = 'none';
-            bottomButtons.style.display = 'none';
-          });
-        }
-      } catch (error) {
-        console.error('Error during initialization:', error);
-      }
-    });
-
-    function navigateTo(page) {
-      window.location.href = page;
-    }
-
-    function logout() {
-      // Show a confirmation dialog
-      const confirmLogout = confirm('Are you sure you want to log out?');
-
-      if (confirmLogout) {
-        console.log('Logout confirmed.');
-        // Use Firebase signOut
-        signOut(auth).then(() => {
-          console.log('User signed out successfully.');
-          // Clear the stored email from localStorage
-          localStorage.removeItem('loggedInUserEmail');
-          // Redirect to the index page
-          window.location.replace('index.html');
-        }).catch((error) => {
-          // An error happened during logout
-          console.error('Logout Error:', error);
-          alert('Logout failed. Please try again.');
-        });
-      } else {
-        console.log('Logout cancelled.');
-      }
-    }
-
-    // Function to display user email (placeholder - replace with actual logic)
-    function displayUserEmail() {
-      const userEmailSpan = document.getElementById('user-email');
-      // *** INTEGRATE YOUR ACTUAL EMAIL FETCHING LOGIC HERE ***
-      // This typically involves:
-      // 1. Checking if the user is logged in (e.g., by looking for a token).
-      // 2. If logged in, fetching the user's email from your authentication system or backend.
-      // 3. Updating the textContent of the userEmailSpan with the fetched email.
-
-      // Retrieve email from localStorage
-      const loggedInUserEmail = localStorage.getItem('loggedInUserEmail');
-
-      if (userEmailSpan) {
-        if (loggedInUserEmail && loggedInUserEmail !== '') {
-          userEmailSpan.textContent = loggedInUserEmail;
-        } else {
-          userEmailSpan.textContent = 'Guest'; // Display 'Guest' if email is not in localStorage
-          // Optionally hide the logout button if no user is logged in
-          const logoutButton = document.getElementById('logout-button');
-          if (logoutButton) { logoutButton.style.display = 'none'; }
-        }
-      }
-    }
-
-    // Call displayUserEmail on page load
-    displayUserEmail();
-
-    // Add event listener for the logout button
-    const logoutButton = document.getElementById('logout-button');
-    if (logoutButton) {
-      logoutButton.addEventListener('click', logout);
-    }
-
-    // Auth state observer (optional, but good for real-time auth state changes)
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        console.log('Auth state changed: User is signed in:', user.email);
-        // You could update UI based on auth state here if needed
-         // For example, ensure logout button is visible if user is signed in
-          const logoutButton = document.getElementById('logout-button');
-          if (logoutButton) { logoutButton.style.display = 'block'; }
-
-      } else {
-        console.log('Auth state changed: No user is signed in.');
-         // For example, ensure logout button is hidden if user is signed out
-          const logoutButton = document.getElementById('logout-button');
-          if (logoutButton) { logoutButton.style.display = 'none'; }
-
-      }
-    });
-
-  </script>
 </body>
 </html>

@@ -151,7 +151,6 @@ body {
   background-color: #45a049;
 }
 
-/* Style for the new user info and logout controls */
 .user-auth-controls {
   display: flex;
   align-items: center;
@@ -184,7 +183,6 @@ body {
   background-color: #d32f2f;
 }
 
-/* Adjust responsive styles for header */
 @media (max-width: 992px) {
   .nav-links {
     gap: 0.8rem;

@@ -25,7 +25,6 @@ function showCardById(cardId) {
   console.log('Current active cards:', activeTechniqueContent.querySelectorAll('.flashcard.active-card').length);
 }
 
-// Function to toggle the visible technique section
 function toggleTechnique(techniqueId) {
   console.log('toggleTechnique called with ID:', techniqueId);
   
@@ -71,7 +70,6 @@ function toggleTechnique(techniqueId) {
 
   } else {
     console.log(`Technique with ID '${techniqueId}' not found.`);
-    // If no technique is found (e.g., navigating to Home), show the initial homepage content
      if (homepageContainer) {
         homepageContainer.style.display = 'flex';
         console.log('Showed homepage initial container.');
@@ -84,145 +82,79 @@ function toggleTechnique(techniqueId) {
   }
 }
 
-async function isUserLoggedIn() {
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOMContentLoaded fired on homepage.html");
   try {
-    const spotifyToken = localStorage.getItem('spotifyAccessToken');
-    const expiryTime = localStorage.getItem('spotifyTokenExpiry');
+    const initialContent = document.querySelector('.main-content > .container');
+    const techniqueDisplayArea = document.getElementById('technique-display-area');
+    const bottomButtons = document.getElementById('bottom-technique-buttons');
+    const aboutUsFooterButton = document.getElementById('about-us-footer-button');
+    const homeNavButton = document.querySelector('.nav-links button[onclick*="homepage.html"]');
 
-    if (!spotifyToken || !expiryTime) return false;
+    if (techniqueDisplayArea) techniqueDisplayArea.style.display = 'none';
+    if (bottomButtons) bottomButtons.style.display = 'none';
+    if (initialContent) initialContent.style.display = 'flex';
+    if (aboutUsFooterButton) aboutUsFooterButton.style.display = 'block';
 
-    if (Date.now() > parseInt(expiryTime)) {
-      localStorage.removeItem('spotifyAccessToken');
-      localStorage.removeItem('spotifyTokenExpiry');
-      return false;
+    const urlParams = new URLSearchParams(window.location.search);
+    const technique = urlParams.get('technique');
+    if (technique) {
+      toggleTechnique(technique);
+      if (initialContent) initialContent.style.display = 'none';
+      if (techniqueDisplayArea) techniqueDisplayArea.style.display = 'block';
+      if (bottomButtons) bottomButtons.style.display = 'flex';
+      if (aboutUsFooterButton) aboutUsFooterButton.style.display = 'none';
+      document.querySelectorAll('#bottom-technique-buttons .technique-button').forEach(button => {
+        button.classList.remove('active');
+      });
+      const activeBottomButton = document.querySelector(`#bottom-technique-buttons .technique-button[data-technique="${technique}"]`);
+      if (activeBottomButton) {
+        activeBottomButton.classList.add('active');
+      }
     }
 
-    return true;
-  } catch (error) {
-    console.error('Error checking login status:', error);
-    return false;
-  }
-}
-
-async function renderMusicUI() {
-  const container = document.getElementById("music-ui");
-  if (!container) return;
-
-  container.innerHTML = "";
-
-  const accessToken = await validateToken(); // defined in spotify.js
-
-  if (accessToken) {
-    container.innerHTML = `
-      <div class="music-loggedin-ui">
-        <div class="search-section">
-          <input type="text" id="songSearch" placeholder="Search for a song..." />
-          <button onclick="searchMusic()">Search</button>
-        </div>
-        <div class="genre-section">
-          <select id="genreSelect" onchange="handleGenreChange()">
-            <option value="">Select a Genre</option>
-            <option value="lofi">Lo-Fi Beats</option>
-            <option value="classical">Classical Piano</option>
-            <option value="ambient">Ambient Study</option>
-            <option value="jazz">Jazz for Focus</option>
-            <option value="nature">Nature Sounds</option>
-            <option value="instrumental">Instrumental Study</option>
-            <option value="electronic">Electronic Focus</option>
-            <option value="rain">Rain Sounds</option>
-            <option value="cafe">Cafe Ambience</option>
-            <option value="meditation">Meditation Music</option>
-            <option value="white-noise">White Noise</option>
-            <option value="binaural">Binaural Beats</option>
-          </select>
-          <button onclick="playSelectedGenre()">Play Genre</button>
-        </div>
-      </div>
-    `;
-  } else {
-    container.innerHTML = `
-      <button onclick="navigateTo('spotify.html')" class="spotify-bar-btn">
-        <img src="Images/social.png" alt="Spotify"> Play some music?
-      </button>
-    `;
-  }
-}
-
-window.searchMusic = searchMusic;
-
-function searchMusic() {
-  const query = document.getElementById("songSearch")?.value;
-  if (query?.trim()) {
-    const encoded = encodeURIComponent(query);
-    window.open(`https://open.spotify.com/search/${encoded}`, "_blank");
-  }
-}
-
-function handleGenreChange() {
-  const genre = document.getElementById("genreSelect")?.value;
-  if (genre) {
-    console.log(`Genre selected: ${genre}`);
-  }
-}
-
-function playSelectedGenre() {
-  const genre = document.getElementById("genreSelect")?.value;
-  const genreMap = {
-    'lofi': '37i9dQZF1DXc8kgYqQLMfH',
-    'classical': '37i9dQZF1DX4sWSpwq3LiO',
-    'ambient': '37i9dQZF1DX4E3UdUs7fUx',
-    'jazz': '37i9dQZF1DX0BcQWzuB7ZO',
-    'nature': '37i9dQZF1DWXe9gFZP0gtP',
-    'instrumental': '37i9dQZF1DX4sWSpwq3LiO',
-    'electronic': '37i9dQZF1DX4dyzvuaRJ0n',
-    'rain': '37i9dQZF1DX8ymr6UES7vc',
-    'cafe': '37i9dQZF1DX6ziVCJnEm59',
-    'meditation': '37i9dQZF1DWZqd5JICZI0u',
-    'white-noise': '37i9dQZF1DWX83CujKHHOn',
-    'binaural': '37i9dQZF1DX3oM43CtKnRV'
-  };
-
-  const playlistId = genreMap[genre];
-  if (playlistId) {
-    window.open(`https://open.spotify.com/playlist/${playlistId}`, "_blank");
-  } else {
-    window.open(`https://open.spotify.com/search/${genre}%20study%20music`, "_blank");
-  }
-}
-
-document.addEventListener("DOMContentLoaded", async () => {
-  try {
-    // Initially hide all technique sections
-    document.querySelectorAll('#technique-display-area .technique-content').forEach(content => {
-      content.classList.remove('active');
-      content.querySelectorAll('.flashcard').forEach(card => card.classList.remove('active-card'));
-    });
-
-    // Delegate click handling for arrows and technique buttons
     document.addEventListener('click', event => {
       if (event.target.classList.contains('arrow-button')) {
         const targetCardId = event.target.getAttribute('data-target');
         if (targetCardId) {
-          console.log('Arrow button clicked, target:', targetCardId);
           showCardById(targetCardId);
         }
       } else if (event.target.classList.contains('technique-button')) {
         const techniqueId = event.target.getAttribute('data-technique');
         if (techniqueId) {
-          console.log('Technique button clicked. ID:', techniqueId);
           toggleTechnique(techniqueId);
-        }
-      } else if (event.target.classList.contains('step-nav-button')) { // Add listener for step navigation buttons
-          const targetCardId = event.target.getAttribute('data-target');
-          if (targetCardId) {
-              console.log('Step navigation button clicked, target:', targetCardId);
-              showCardById(targetCardId);
+          if (initialContent) initialContent.style.display = 'none';
+          if (techniqueDisplayArea) techniqueDisplayArea.style.display = 'block';
+          if (bottomButtons) bottomButtons.style.display = 'flex';
+          if (aboutUsFooterButton) aboutUsFooterButton.style.display = 'none';
+          document.querySelectorAll('#bottom-technique-buttons .technique-button').forEach(button => {
+            button.classList.remove('active');
+          });
+          const activeBottomButton = document.querySelector(`#bottom-technique-buttons .technique-button[data-technique="${techniqueId}"]`);
+          if (activeBottomButton) {
+            activeBottomButton.classList.add('active');
           }
+        }
       }
     });
 
-    await renderMusicUI();
+     if (homeNavButton) {
+       homeNavButton.addEventListener('click', (event) => {
+          if (event.target.getAttribute('onclick') && event.target.getAttribute('onclick').includes('homepage.html')) {
+              console.log('Homepage Home button clicked. Resetting view.');
+             if (initialContent) initialContent.style.display = 'flex';
+             if (techniqueDisplayArea) techniqueDisplayArea.style.display = 'none';
+             if (bottomButtons) bottomButtons.style.display = 'none';
+             if (aboutUsFooterButton) aboutUsFooterButton.style.display = 'block';
+             if (window.location.pathname.endsWith('/homepage.html') || window.location.pathname.endsWith('/')) {
+                  event.preventDefault(); 
+                  window.history.replaceState({}, document.title, window.location.pathname); 
+             }
+          }
+       });
+     }
+
   } catch (error) {
-    console.error('Error during initialization:', error);
+    console.error('Error during DOMContentLoaded in techniques.js:', error);
   }
 });

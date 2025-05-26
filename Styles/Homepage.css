@@ -8,8 +8,6 @@ body {
 .main-content {
   width: 100%;
   max-width: 1600px;
-  margin: 50px auto 0 auto;
-  padding: 0 40px 100px;
   box-sizing: border-box;
 }
 
@@ -26,7 +24,7 @@ body {
   flex: 3;
   min-width: 600px;
   display: flex;
-  margin-left: 2%;
+  margin-left: 10%;
   margin-right: 2%;
   flex-direction: column;
   justify-content: center;
@@ -71,6 +69,8 @@ body {
   gap: 15px;
   font-size: 1.2rem;
   margin: 20px auto;
+  margin-top: 3%;
+  margin-right: 5%;
   padding: 10px;
   border-radius: 10px;
   border: 0.5px solid white;
@@ -119,80 +119,79 @@ body {
   }
 }
 
-/* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
     .main-content {
-        padding: 20px; /* Adjust padding */
+        padding: 20px; 
     }
 
     .container {
-        flex-direction: column; /* Stack columns vertically */
-        gap: 30px; /* Keep container gap as is */
+        flex-direction: column; 
+        gap: 30px; 
     }
 
     .left-column,
     .right-column {
-        padding: 0 15px; /* Adjust padding */
-        min-width: auto; /* Allow shrinking */
+        padding: 0 15px; 
+        min-width: auto; 
     }
 
     .descrp {
-        font-size: 1.5rem; /* Adjust font size */
-        margin-top: 40px; /* Adjust margin */
-        text-align: center; /* Center text */
+        font-size: 1.5rem;
+        margin-top: 40px; 
+        text-align: center; 
     }
 
     .image-box {
-        height: 250px; /* Adjust image box height */
+        height: 250px; 
     }
 
     .right-column {
-        margin-top: 20px; /* Adjust margin */
+        margin-top: 20px;
         margin-right: auto;
         margin-left: auto;
-        align-items: center; /* Ensure items are centered in smaller screens too */
-        gap: 10px; /* Adjusted gap for this breakpoint */
+        align-items: center;
+        gap: 10px; 
     }
 
     .right-column p {
-        text-align: center; /* Center text */
+        text-align: center; 
     }
 
     .right-column button {
-        width: 90%; /* Adjust button width */
-        max-width: 300px; /* Add max-width */
-        padding: 12px 20px; /* Adjust padding */
-        font-size: 1rem; /* Adjust font size */
+        width: 90%; 
+        max-width: 300px;
+        padding: 12px 20px; 
+        font-size: 1rem; 
     }
 }
 
 @media (max-width: 480px) {
     .main-content {
-        padding: 15px; /* Further adjust padding */
+        padding: 15px;
     }
 
     .container {
-        gap: 20px; /* Further adjust gap */
+        gap: 20px;
     }
 
     .left-column,
     .right-column {
-        padding: 0 10px; /* Further adjust padding */
-        gap: 8px; /* Adjusted gap for this breakpoint */
+        padding: 0 10px; 
+        gap: 8px;
     }
 
     .descrp {
-        font-size: 1.2rem; /* Further adjust font size */
-        margin-top: 30px; /* Further adjust margin */
+        font-size: 1.2rem; 
+        margin-top: 30px;
     }
 
     .image-box {
-        height: 200px; /* Further adjust image box height */
+        height: 200px; 
     }
 
     .right-column button {
-        width: 100%; /* Full width button */
-        padding: 10px 15px; /* Adjust padding */
-        font-size: 0.9rem; /* Further adjust font size */
+        width: 100%; 
+        padding: 10px 15px; 
+        font-size: 0.9rem; 
     }
 }
