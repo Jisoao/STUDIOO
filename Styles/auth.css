@@ -27,7 +27,6 @@ body {
 }
 
 .auth-card {
-  background: rgba(30, 30, 30, 0.7);
   border: 1.5px solid rgba(255, 255, 255, 0.25);
   border-radius: 16px;
   padding: 3rem 2.5rem 2.5rem 2.5rem;
@@ -218,10 +217,11 @@ body {
   }
 
   .auth-card {
-    width: 100%;
+    width: 80%;
     min-width: 0;
     max-width: 98vw;
-    padding: 2rem 1rem;
+    margin: 45%;
+    padding: 5rem 1rem;
   }
 
   .auth-logo {

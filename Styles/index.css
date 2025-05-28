@@ -7,8 +7,8 @@ body {
 
 
 .quote-section {
-  margin: 0 0 70px;
-  padding: 70px 80px 0;
+  margin: 15px 25px 70px;
+  padding: 50px 60px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -59,17 +59,74 @@ body {
   display: flex;
   justify-content: space-between;
   gap: 30px;
-  padding: 0 80px 60px;
-  background: linear-gradient(to right, #000000, #2f2f2f, #000000);
+  padding: 0 60px 60px;
   flex-wrap: wrap;
   cursor: pointer;
 }
 
 .study-images img {
-  width: 400px;
+  width: 350px;
   height: 300px;
   border-radius: 10px;
   object-fit: cover;
+  flex-shrink: 0;  
+}
+
+@media screen and (max-width: 1024px) {
+  .quote-left h1 {
+    font-size: 48px;
+  }
+
+  .subtext {
+    font-size: 18px;
+  }
+
+  .quote-right {
+    margin-right: 40px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .quote-section {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 30px 0;
+  }
+
+  .quote-right {
+    margin: 0;
+  }
+
+  .quote-left h1 {
+    font-size: 40px;
+  }
+
+  .subtext {
+    font-size: 16px;
+  }
+
+  .study-images {
+    padding: 0 20px 40px;
+    gap: 20px;
+  }
+
+  .study-images img {
+    width: 300px;
+    max-width: 300px;
+    height: auto;
+    margin-left: 10%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .quote-left h1 {
+    font-size: 32px;
+  }
+
+  .GTS {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
 }
 
 

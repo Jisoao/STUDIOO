@@ -60,6 +60,20 @@ async function validateToken() {
 
 // Handle authentication state
 async function handleAuthState() {
+  // Check website login first
+  const websiteUser = window.getAuthState ? window.getAuthState() : null;
+  if (!websiteUser) {
+    const floatingPlayer = document.getElementById('floating-spotify-player');
+    if (floatingPlayer) {
+      floatingPlayer.innerHTML = `
+        <button onclick="window.location.href='login.html'" class="spotify-bar-btn">
+          Please login to the website first
+        </button>
+      `;
+    }
+    return null;
+  }
+
   const accessToken = await validateToken();
   const isLoginPage = window.location.pathname.includes('spotify.html');
   
@@ -105,7 +119,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 });
+
 async function initiateSpotifyLogin() {
+  // Check if user is logged into the website first
+  const user = window.getAuthState ? window.getAuthState() : null;
+  
+  if (!user) {
+    alert('Please login to the website first before connecting to Spotify.');
+    return;
+  }
+
   const authUrl = new URL('https://accounts.spotify.com/authorize');
   
   const codeVerifier = generateRandomString(128);
@@ -180,18 +203,16 @@ async function exchangeCodeForTokens(code) {
       }
     } catch (profileError) {
       console.error('Failed to fetch Spotify user profile:', profileError);
-      // Continue even if fetching profile fails, but product type won't be available
     }
     // -------------------------------------------------
 
     // Check for stored technique ID and navigate if found
     const lastTechniqueId = localStorage.getItem('lastTechniqueId');
     if (lastTechniqueId) {
-        localStorage.removeItem('lastTechniqueId'); // Clean up stored ID
-        // Find and trigger click on the corresponding technique button
+        localStorage.removeItem('lastTechniqueId');
         const techniqueButton = document.querySelector(`.technique-button[data-technique="${lastTechniqueId}"]`);
         if (techniqueButton) {
-            techniqueButton.click(); // Simulate click to show the technique
+            techniqueButton.click();
         }
     }
 
@@ -203,14 +224,13 @@ async function exchangeCodeForTokens(code) {
 
   } catch (error) {
     console.error('Token exchange failed:', error);
-    // Handle error (e.g., show error message to user)
   }
 }
 
 function checkForAccessToken() {
   const hash = window.location.hash.substring(1);
   const hashParams = new URLSearchParams(hash);
-  const accessToken = hashParams.get('access_token'); // Still check for old token in hash for backward compatibility
+  const accessToken = hashParams.get('access_token');
 
   const urlParams = new URLSearchParams(window.location.search);
   const code = urlParams.get('code');
@@ -224,15 +244,13 @@ function checkForAccessToken() {
   if (code) {
     console.log('Authorization code found in URL.', code);
     exchangeCodeForTokens(code);
-  } else if (accessToken) { // Handle old implicit grant flow if necessary
+  } else if (accessToken) {
     console.log('Old access token found in hash.', accessToken);
-    // Process old token - store and update UI
     const expiresIn = hashParams.get('expires_in');
     localStorage.setItem('spotifyAccessToken', accessToken);
     const expiryTime = Date.now() + (parseInt(expiresIn) * 1000);
     localStorage.setItem('spotifyTokenExpiry', expiryTime.toString());
     alert('Successfully connected to Spotify (Implicit Grant)! Please consider updating to a newer flow.');
-    
   } else if (error) {
     console.error('Spotify authorization error:', error);
     alert(`Spotify authorization failed: ${error}`);
@@ -259,22 +277,26 @@ async function fetchSpotifyData(endpoint, accessToken) {
   }
 }
 
-// Make functions available globally
-window.validateToken = validateToken;
-window.fetchSpotifyData = fetchSpotifyData;
-window.handleAuthState = handleAuthState;
-window.renderMusicUI = renderMusicUI;
-window.initiateSpotifyLogin = initiateSpotifyLogin;
-window.searchSpotify = searchSpotify;
-window.playSpotifyItem = playSpotifyItem;
-
 async function renderMusicUI(container) {
   console.log('renderMusicUI called.', { container: !!container });
+  
+  // Check website login first
+  const websiteUser = window.getAuthState ? window.getAuthState() : null;
+  if (!websiteUser) {
+    if (container) {
+      container.innerHTML = `
+        <button onclick="window.location.href='login.html'" class="spotify-bar-btn">
+          Please login to the website first
+        </button>
+      `;
+    }
+    return;
+  }
+
   const accessToken = await validateToken();
   console.log('renderMusicUI - AccessToken from validateToken:', accessToken ? 'Exists' : 'Does not exist');
 
   if (accessToken) {
-    // Check if the music UI is already rendered
     if (container && !container.querySelector('.music-loggedin-ui')) {
       container.innerHTML = `
         <div class="music-loggedin-ui">
@@ -289,10 +311,8 @@ async function renderMusicUI(container) {
         </div>
       `;
       
-      // Add collapsed class initially
       container.classList.add('collapsed');
       
-      // Add click handler to toggle expanded/collapsed state
       container.addEventListener('click', (e) => {
         if (container.classList.contains('collapsed')) {
           container.classList.remove('collapsed');
@@ -300,7 +320,6 @@ async function renderMusicUI(container) {
         }
       });
 
-      // Add click handler to collapse when clicking outside
       document.addEventListener('click', (e) => {
         if (!container.contains(e.target) && container.classList.contains('expanded')) {
           container.classList.remove('expanded');
@@ -311,7 +330,6 @@ async function renderMusicUI(container) {
       console.log('renderMusicUI - Rendered logged-in UI.');
     }
   } else {
-    // Check if the login button is already rendered
     if (container && !container.querySelector('.spotify-bar-btn')) {
       container.innerHTML = `
         <button onclick="initiateSpotifyLogin()" class="spotify-bar-btn">
@@ -340,15 +358,12 @@ async function searchSpotify() {
     return;
   }
 
-  // Clear previous results
   resultsArea.innerHTML = '<p>Searching...</p>';
 
   try {
-    // Search for tracks and playlists
     const data = await fetchSpotifyData(`/search?q=${encodeURIComponent(query)}&type=track,playlist&limit=10`, accessToken);
     console.log('Spotify search results:', data);
 
-    // Check if tracks or playlists data and items exist and have items
     const hasTracks = data.tracks && data.tracks.items && data.tracks.items.length > 0;
     const hasPlaylists = data.playlists && data.playlists.items && data.playlists.items.length > 0;
 
@@ -359,7 +374,6 @@ async function searchSpotify() {
 
     let resultsHtml = '<ul style="list-style: none; padding: 0;">';
 
-    // Add track results
     if (hasTracks) {
         resultsHtml += '<li><strong>Tracks:</strong></li>';
         data.tracks.items.forEach(track => {
@@ -369,7 +383,6 @@ async function searchSpotify() {
         });
     }
 
-    // Add playlist results
     if (hasPlaylists) {
         resultsHtml += '<li><strong>Playlists:</strong></li>';
         data.playlists.items.forEach(playlist => {
@@ -385,22 +398,24 @@ async function searchSpotify() {
   } catch (error) {
     resultsArea.innerHTML = '<p>Error searching Spotify.</p>';
     console.error('Spotify search error:', error);
-    if (error.message.includes('Spotify API error')) {
-      console.error('Spotify API responded with an error. Status:', error.message.split(':')[1]);
-    } else {
-      console.error('An unexpected error occurred during Spotify search.', error);
-    }
   }
 }
 
-// Function to play a Spotify item using its URI (will be implemented next)
 function playSpotifyItem(uri) {
     console.log('Attempting to play Spotify item:', uri);
     const resultsArea = document.getElementById('spotify-results-area');
     if (!resultsArea) return;
 
-    // Clear previous content and embed the Spotify player
     resultsArea.innerHTML = `
         <iframe src="https://open.spotify.com/embed/${uri.split(':')[1]}/${uri.split(':')[2]}?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     `;
 }
+
+// Make functions available globally
+window.validateToken = validateToken;
+window.fetchSpotifyData = fetchSpotifyData;
+window.handleAuthState = handleAuthState;
+window.renderMusicUI = renderMusicUI;
+window.initiateSpotifyLogin = initiateSpotifyLogin;
+window.searchSpotify = searchSpotify;
+window.playSpotifyItem = playSpotifyItem;

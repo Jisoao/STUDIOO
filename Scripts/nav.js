@@ -1,5 +1,5 @@
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-auth.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-auth.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -16,78 +16,73 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// Navigation elements (excluding old menu elements)
-const loginBtn = document.querySelector('.login-btn');
-const logoutBtn = document.getElementById('logout-button'); // Corrected ID based on HTML
+// Navigation function
+function navigateTo(url) {
+  window.location.href = url;
+}
 
-// Handle logout
+// Get DOM elements using IDs
+const loginBtn = document.getElementById('login-btn');
+const createAccountBtn = document.getElementById('create-account-btn');
+const logoutBtn = document.getElementById('logout-button');
+const userEmailSpan = document.getElementById('user-email');
+
+// Display user email
+function displayUserEmail(user) {
+  if (user && userEmailSpan) {
+    userEmailSpan.textContent = user.email;
+    userEmailSpan.style.display = 'inline-block';
+  }
+}
+
+// Auth state observer
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is signed in
+    console.log('User signed in:', user.email);
+    if (loginBtn) loginBtn.style.display = 'none';
+    if (createAccountBtn) createAccountBtn.style.display = 'none';
+    if (logoutBtn) logoutBtn.style.display = 'inline-block';
+    displayUserEmail(user);
+  } else {
+    // No user is signed in
+    console.log('No user signed in.');
+    if (loginBtn) loginBtn.style.display = 'inline-block';
+    if (createAccountBtn) createAccountBtn.style.display = 'inline-block';
+    if (logoutBtn) logoutBtn.style.display = 'none';
+    if (userEmailSpan) {
+      userEmailSpan.textContent = '';
+      userEmailSpan.style.display = 'none';
+    }
+    
+    // Clear Spotify tokens when website user logs out
+    localStorage.removeItem('spotifyAccessToken');
+    localStorage.removeItem('spotifyRefreshToken');
+    localStorage.removeItem('spotifyTokenExpiry');
+  }
+});
+
+// Logout event
 if (logoutBtn) {
-  logoutBtn.addEventListener('click', async (event) => {
-    event.preventDefault();
-    if (confirm('Are you sure you want to logout?')) {
+  logoutBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const confirmed = confirm('Are you sure you want to logout?');
+    if (confirmed) {
       try {
+        // Clear Spotify tokens
+        localStorage.removeItem('spotifyAccessToken');
+        localStorage.removeItem('spotifyRefreshToken');
+        localStorage.removeItem('spotifyTokenExpiry');
+        
         await signOut(auth);
         window.location.href = 'index.html';
       } catch (error) {
-        console.error('Error signing out:', error);
+        console.error('Logout error:', error);
       }
     }
   });
 }
 
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // User is signed in
-    if (loginBtn) {
-      loginBtn.style.display = 'none';
-    }
-  } else {
-    // User is signed out
-    if (loginBtn) {
-      loginBtn.style.display = 'block';
-    }
-  }
-});
-
-
-function navigateTo(url) {
-  window.location.href = url;
-}
-
-// Function to display user email (kept for use in HTML and auth state observer)
-function displayUserEmail() {
-  const userEmailSpan = document.getElementById('user-email');
-  const loggedInUserEmail = localStorage.getItem('loggedInUserEmail');
-
-  if (userEmailSpan) {
-    if (loggedInUserEmail && loggedInUserEmail !== '') {
-      userEmailSpan.textContent = loggedInUserEmail;
-    } else {
-      userEmailSpan.textContent = ''; 
-    }
-  }
-}
-
-onAuthStateChanged(auth, (user) => {
-  const logoutButton = document.getElementById('logout-button');
-  const userEmailSpan = document.getElementById('user-email');
-
-  if (user) {
-    console.log('Auth state changed: User is signed in:', user.email);
-    if (logoutButton) { logoutButton.style.display = 'block'; } // Show logout button
-    if (userEmailSpan) { displayUserEmail(); } // Update email display
-  } else {
-    console.log('Auth state changed: No user is signed in.');
-    if (logoutButton) { logoutButton.style.display = 'none'; } // Hide logout button
-    if (userEmailSpan) { userEmailSpan.textContent = ''; } // Clear email display
-  }
-});
-
-// Initial display email on page load
-document.addEventListener('DOMContentLoaded', () => {
-  displayUserEmail();
-});
-
+// Expose navigation function and auth state globally
 window.navigateTo = navigateTo;
-window.logout = logout;
-window.displayUserEmail = displayUserEmail;
+window.getAuthState = () => auth.currentUser;

@@ -8,12 +8,13 @@
   <link rel="stylesheet" href="Styles/Homepage.css" />
   <link rel="stylesheet" href="Styles/Footer.css" />
   <link rel="stylesheet" href="Styles/techniques.css">
+  
 </head>
 <body>
   <!-- Navigation Header -->
   <div class="header">
     <div class="nav-links">
-      <button class="nav-button" id="logo" onclick="navigateTo('homepage.html')">STUDio</button>
+      <button class="nav-button" id="logo" onclick="navigateTo('index.html')">STUDio</button>
       <button class="nav-button" onclick="navigateTo('homepage.html')">Home</button>
       <button class="nav-button" onclick="navigateTo('techniques.html')">Techniques</button>
       <button class="nav-button" id="about-us-nav-button" onclick="navigateTo('AboutUS/abts.html')">About</button>
@@ -21,6 +22,8 @@
     <!-- User Info and Logout -->
     <div class="user-auth-controls">
       <span id="user-email" class="user-email-text"></span>
+      <button class="nav-button" id="login-btn" onclick="navigateTo('auth.html#login')">Login</button>
+<button class="nav-button" id="create-account-btn" onclick="navigateTo('auth.html#signup')">Create Account</button>
       <button class="nav-button" id="logout-button">Logout</button>
     </div>
   </div>
@@ -736,7 +739,7 @@
   </div>
 
   <script src="Scripts/techniques.js" ></script>
-  <script src="Scripts/spotify.js" type="module"></script>
+  <script src="Scripts/spotify.js"></script>
   <script src="Scripts/nav.js" type="module"></script>
 
 </body>
